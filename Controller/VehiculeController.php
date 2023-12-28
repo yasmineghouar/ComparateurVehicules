@@ -30,22 +30,15 @@ class VehiculeController{
             
             exit;
         }else{
-            echo "erreur chargement page Vehicule";
+            echo "erreur chargementttttt page Vehicule";
         }
+
+
+
+
+        
     }
-    public function traitement_liste2(){//fonction qui traite la requete de liste deroulante dans la page Marques; permet d'afficher les details du véhciule selectionné
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $vehiculeId = $_POST['vehiculeId'];
-            $v=new VehiculeView();
-            $v->index();
-            $v->showVehiculeDetails($vehiculeId);
-            echo "<script>window.location.href='/Tidjelabine/'</script>"; 
-            
-            exit;
-        }else{
-            echo "erreur chargement page Vehicule";
-        }
-    }
+    
 
 
 
