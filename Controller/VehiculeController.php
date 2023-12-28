@@ -36,16 +36,14 @@ class VehiculeController{
     public function traitement_liste2(){//fonction qui traite la requete de liste deroulante dans la page Marques; permet d'afficher les details du véhciule selectionné
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $vehiculeId = $_POST['vehiculeId'];
-            $v = new VehiculeView();
-            $result = array(
-                'success' => true,
-                'details' => $v->showVehiculeDetails($vehiculeId)  
-            );
-            header('Content-Type: application/json');
-           
+            $v=new VehiculeView();
+            $v->index();
+            $v->showVehiculeDetails($vehiculeId);
+            echo "<script>window.location.href='/Tidjelabine/'</script>"; 
+            
             exit;
-        } else {
-            echo json_encode(array('success' => false, 'message' => 'Erreur chargement page Vehicule'));
+        }else{
+            echo "erreur chargement page Vehicule";
         }
     }
 
