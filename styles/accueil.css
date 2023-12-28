@@ -1,0 +1,280 @@
+
+body{
+  background: white;
+}
+#logo-container{
+    position : relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    height: 400%; /* Ajustez la hauteur selon vos besoins */
+    width: 700px;
+   
+    padding: 20px; /* Espace intérieur du conteneur, ajustez selon vos préférences */
+    margin-top: 40px;
+    margin-right: 25px;
+}
+
+#logo{
+    max-width: 100%; /* Assure que le logo ne dépasse pas la largeur du conteneur */
+    max-height: 100%;
+   /* height: 30px;  Garantit que le logo conserve ses proportions originales */
+    width: 600px;
+    
+}
+
+#socialMedia-container{
+    display: flex;
+    position : relative;
+    margin-left:900px;
+    margin-right:50px;
+    /*justify-content: space-between;*/
+    align-items: center;
+    height: 30px; 
+    width: 600px;
+    /*background-color: blueviolet; /* Couleur de fond du conteneur, ajustez selon vos préférences */
+    padding: 10px; /* Espace intérieur du conteneur, ajustez selon vos préférences */
+    margin-top: 0px;
+}
+
+.lien-image {
+    margin-left: 30px; /* Marge à gauche entre les liens images, ajustez selon vos préférences */
+    width: 25px; /* Ajustez la largeur selon vos besoins */
+    height: 25px; /* Ajustez la hauteur selon vos besoins */
+}
+
+
+#header{ /*le header a gauche logo a droite les reseaux sociaux */
+    
+    height: 80px; 
+    width:1600px;
+  /*background-color: aqua;*/
+    display: flex;
+    align-items: center;
+   
+}
+
+#menu-containerr{
+  margin-top: 50px;
+}
+
+#diaporama-container{
+    position : relative;
+   
+    margin: 5px;
+    margin-top: 50px;
+    position: relative;
+   width: 700px;
+  
+    
+    height: 300px;
+    /*overflow: hidden;*/
+  }
+ 
+  
+  .Diapo-container img{
+    position : absolute;
+    top: 0;
+    left: 0;
+    /*opacity: 0;*/
+   /* animation: animImg 8s infinite;*/
+    width: 700px;
+    height: 300px;
+    
+  }
+    /*liste*/
+    .menu{
+      /*background-color: #b3aeae;*/
+      background-color :#cf0015;
+      width:900px;
+      height:40px;
+      font-size: large;
+      border-radius: 10px;/*l'angle des coins*/
+      margin-bottom: 20px;
+      text-align: center;
+      
+    }
+    
+    .liste{
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin : 30px;
+    
+    }
+    .liste li {
+      margin: 0 10px;
+      margin-left: 0%;
+      position: relative;
+      color: #c5a173;
+    }
+    
+    
+    .liste a {
+      color: #edeae6;
+      /*color :#007BFF;*/
+      text-decoration: none;
+      font-family: 'Merriweather';
+      padding: 10px; /* Ajoutez un espace interne aux liens pour un meilleur clic */
+      
+      
+      }
+   
+  .liste a:hover {
+   
+    color: #c5a173;; 
+  }
+
+  #zoneContenu {
+    width: 80%; /* Ajustez la largeur selon vos besoins */
+    height: auto;
+    border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+    padding: 5%;
+    box-sizing: border-box;
+   background-color: #edeae6;;
+    border-radius: 10px; /* Coins arrondis*/
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #zone1 {
+    display: flex;
+   /* background-color: #c5a173;*/
+    justify-content: space-around; /* Ajustez selon vos préférences */
+    border-radius: 10px; /* Coins arrondis*/
+    border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+    padding: 5%;
+    margin: 5%;
+    align-items: center;
+    flex-direction: row; /* Assurez-vous que la direction est définie sur "row" (horizontal) */
+}
+.zone1-container a {
+  text-decoration: none; /* Supprime les soulignements sur les liens */
+}
+
+
+  .zone1-container img {
+    width: 200px; /* Ajustez la largeur des images selon vos besoins */
+    height: auto; /* Garde le rapport hauteur/largeur original */
+    border-radius: 10px; /* Coins arrondis*/
+    margin: 10px; /* Marge autour de chaque image */
+    transition: transform 0.3s ease-in-out; /* Ajoute une transition de zoom */
+}
+.zone1-container img:hover {
+  transform: scale(1.1); /* Zoom au survol */
+}
+
+#zone3 {
+  display: flex;
+ 
+  justify-content: space-around; /* Ajustez selon vos préférences */
+  border-radius: 10px; /* Coins arrondis*/
+  border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+  padding: 5%;
+  align-items: center;
+  
+}
+
+#buttonZone3 {
+  background-color: #cf0015; /* Couleur de fond du bouton */
+  color: #edeae6; /* Couleur du texte du bouton */
+  font-size: medium;
+  border: 2px solid #181c16; /* Bordure de couleur plus foncée que le fond */
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: auto;
+  transition: background-color 0.3s ease;
+}
+
+#buttonZone3:hover {
+  background-color: #c5a173; /* Nouvelle couleur de fond au survol */
+  color: #181c16; /* Nouvelle couleur du texte au survol */
+}
+.footer-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; 
+}
+
+.horizontal-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.horizontal-list li {
+  margin: 0 10px; 
+}
+
+.horizontal-list a {
+  text-decoration: none;
+  color: #000; /* Couleur du texte pour les liens */
+}
+
+#zone2 {
+ /* background-color: grey;*/
+  justify-content: space-between;
+  width : 100%;
+  height: 50%;
+  display: flex;
+  align-items: center; 
+  
+
+}
+
+#zone2 .cadre {
+  display: flex;
+  flex-direction: row; /* Changer en "row" si vous préférez une disposition horizontale */
+  justify-content: space-between; /* Espacement équitable entre les éléments du cadre */
+  width: 24%; /* Ajustez la largeur selon vos besoins */
+  border: 3px solid #181c16; /* Bordure pour séparer visuellement les cadres */
+  padding: 10px;
+  margin: 30px; /* Marge entre les cadres */
+  box-sizing: border-box;
+  margin-left: 0px;
+  border-radius: 25px; /* Arrondir les coins avec un rayon de 8 pixels,*/
+  background-color: #c5a173;
+  
+}
+#Comparer{
+margin-top: 50px;
+font-size: medium;
+border: 2px solid #181c16; /* Bordure de couleur plus foncée que le fond */
+padding: 12px 20px;
+border-radius: 5px;
+cursor: pointer;
+/*margin: auto;*/
+margin-left: 380px;
+width: 300px;
+transition: background-color 0.3s ease;
+}
+
+#Comparer:hover {
+  background-color: #c5a173; /* Nouvelle couleur de fond au survol */
+  color: #181c16; /* Nouvelle couleur du texte au survol */
+}
+
+.cadre label{
+  margin-bottom: 8px;
+  font-weight: bold;
+  
+}
+select, input {
+  padding: 8px;
+  margin-bottom: 12px;
+  width: 100%; 
+  box-sizing: border-box;
+}
+.cadre-titre{
+  
+  font-weight: bold;
+  margin-left: 25%
+
+}
+#login-container{
+margin-right: 500px;
+
+}

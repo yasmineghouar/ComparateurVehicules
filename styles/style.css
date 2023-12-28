@@ -1,0 +1,236 @@
+/*selecteur premiere ligne*/
+table th[scope="col"] {
+  background-color: lightgray;
+  }
+  
+  /*selecteur premiere colonne*/
+  table th[scope="row"] { 
+      background-color: lightgray;
+    }
+  
+    table {
+      border-collapse: collapse;
+      margin : 30px;
+      border: 3px dotted #000; /*dotted , sous forme de points noir de largeur 3px*/
+  
+     
+    }
+    
+  
+    /*  des couleurs de fond alternatives aux lignes du corps du tableau */
+  table tbody tr:nth-child(odd) {
+      background-color: #f7f4f4; /* Couleur de fond pour les lignes impaires(fils position odd) */
+    }
+    
+    table tbody tr:nth-child(even) {
+      background-color: lightgray; /* Couleur de fond pour les lignes paires */
+    }
+    
+    /*selecteur pour le titre de lapage h1 'Smartphones'*/
+    h1{
+      font-size: 58px; /*taille police du titre*/
+      font-weight: bold; /*il doit etre gras*/
+      font-style: italic;
+      font-family: fantasy; /*le nom de la police*/
+    }
+  
+    /*liste*/
+  .menu{
+    /*background-color: #b3aeae;*/
+    background-color :#007BFF;
+    width:500px;
+    font-size: large;
+    
+  }
+  
+  .liste{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin : 30px;
+  
+  }
+  .liste li {
+    margin: 0 10px;
+    position: relative;
+    color: white;
+  }
+  
+  
+  .liste a {
+    color: white;
+    /*color :#007BFF;*/
+    text-decoration: none;
+    
+  }
+  
+  .marque-contenu {
+    display: none;
+    position: absolute;
+    color: white;
+    background-color: #007BFF;
+    z-index: 1; /* car la sous liste apparait au dessus de la video et quand je clique dessus ca ne marche pas*/
+    list-style: none; /* car un symbole de liste s'affiche pour le faire disparaitre*/
+    padding: 0;
+  }
+  
+  .marque-contenu li {
+    
+    margin: 0;
+    color: white;
+    padding: 5px 10px;
+  }
+  
+  .marque:hover .marque-contenu {
+    display: block; /*pour inserer l'element ( sous liste marque-contenu) sous la marque*/
+    color: white;
+  
+  }
+  
+  /** FIN LISTE**/
+  
+  
+     
+  
+    /* Style du conteneur au-dessus du tableau */
+  .container{
+    /*background-color: #aaa8a8;*/
+    margin: 5px;
+    position: relative;
+    width: 700px;
+    height: 300px;
+    /*overflow: hidden;*/
+  }
+  
+  .container img{
+    position : absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: animImg 8s infinite;
+    width: 700px;
+    height: 300px;
+    
+  }
+  @keyframes animImg {
+    0%, 100%{
+      opacity: 0;
+    }
+    25%,75%{
+      opacity: 1;
+    }
+  
+  
+  }
+    
+  .container img:nth-child(1){
+    
+    animation-delay: 0s;
+  }
+  .container img:nth-child(2){
+    
+    animation-delay: 2s;
+  }
+  .container img:nth-child(3){
+    animation-delay: 4s;
+  }
+  .container img:nth-child(4){
+    animation-delay: 6s;
+  }
+  
+  .container:hover img{
+    animation-play-state: paused;
+  }
+  /****CSS FORMULAIRE*/
+  #form-container {
+    width: 300px; /* Ajuster la largeur selon vos besoins */
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+    padding: 20px; /* Espace intérieur pour aérer le contenu */
+    border: 1px solid #ccc; /* Bordure avec couleur grise */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  }
+  
+  #form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  input {
+    margin-bottom: 10px; /* Espacement entre les champs de texte */
+    padding: 10px; /* Espace intérieur des champs de texte */
+    border: 1px solid #ccc; /* Bordure autour des champs */
+    border-radius: 3px; /* Coins légèrement arrondis */
+  }
+  
+  button {
+    background-color: #007BFF; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border: none; /* Pas de bordure */
+    padding: 10px 15px; /* Espace intérieur du bouton */
+    border-radius: 3px; /* Coins arrondis */
+    cursor: pointer;
+    margin: auto;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Changement de couleur au survol */
+  }
+  #ajouter{
+    margin: 5%;
+  }
+  
+    
+    /********************************************************/
+    
+  /* Styles de base pour le formulaire 
+  
+  #form {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  #form input {
+    margin: 5px;
+    padding: 5px;
+  }
+  
+  #boutonAjouter {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  #boutonAjouter:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styles pour les caracteristiques individuelles 
+  
+  #caracteristique {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  /* Styles pour les boutons et les entrées de texte 
+  
+  input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Appliquer une marge aux boutons 
+  
+  #boutonAjouter {
+    margin-top: 10px;
+  }
+  
+  

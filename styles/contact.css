@@ -1,0 +1,31 @@
+/* css page contact*/
+#contact-details-container {
+    margin-top: 100px;
+    background-color: #edeae6;
+    color: #181c16;
+    padding: 20px;
+    /*margin: 20px 0;*/
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#contact-details-container h2 {
+    color: #cf0015;
+}
+
+#contact-details-container p {
+    color: #181c16;
+    margin-bottom: 10px;
+}
+.menu{
+    /*background-color: #b3aeae;*/
+    margin-top: 35px;
+    text-align: center;
+    background-color :#cf0015;
+    width:900px;
+    height:40px;
+    font-size: large;
+    border-radius: 10px;/*l'angle des coins*/
+    margin-bottom: 20px;
+    
+  }

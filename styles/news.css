@@ -1,0 +1,124 @@
+.news-container {
+    margin: 10px;
+    margin-top: 100px;
+}
+
+.news-item {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: flex; /* Utilisation de flexbox pour la mise en page */
+}
+
+.news-item-img {
+    flex: 1; /* Le sous-cadre de gauche prend tout l'espace disponible */
+    margin-right: 20px; /* Marge entre l'image et le sous-cadre de droite */
+}
+
+.news-item-img img {
+    width: 100%; /* L'image prend 100% de la largeur du sous-cadre de gauche */
+    display: block;
+}
+
+.news-item-content {
+    flex: 2; /* Le sous-cadre de droite prend deux fois la taille du sous-cadre de gauche */
+    display: flex;
+    flex-direction: column; /* Empiler les éléments en colonne (titre au-dessus du paragraphe) */
+}
+
+.news-item h2 {
+    margin-bottom: 10px;
+}
+
+.news-item p {
+    text-align: justify;
+}
+.read-more {
+   /* position: absolute;*/
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #cf0015;
+    color: #fff;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.read-more:hover {
+    background-color: #cf0015;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.news-details {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.news-details h2 {
+    color: #333;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.news-details p {
+    color: #666;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: justify; /* Justifier le texte */
+    -webkit-column-count: 3; /* Nombre de colonnes */
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 40px; /* Espacement entre les colonnes */
+    -moz-column-gap: 40px;
+    column-gap: 40px;
+}
+
+.news-details p::first-letter {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.image-container img {
+    max-width: 100%; /* Utilisez la largeur maximale pour chaque image */
+    
+    margin-bottom: 10px; /* Espacement entre les images */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+#img1{
+height:500px;
+
+}
+
+#img2{
+    height:400px;
+    width: 600px;
+}
+
+#img3{
+    height:400px;
+    width: 600px;
+}
+.image-container img:hover {
+    transform: scale(1.1); /* Effet de zoom au survol de l'image */
+}

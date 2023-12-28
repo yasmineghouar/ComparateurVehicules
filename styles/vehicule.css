@@ -1,0 +1,59 @@
+ /* Style for the h1 element */
+.vehicule-details h1 {
+    color: #cf0015; /* Red color for the h1 text */
+    text-align: center; /* Center-align the text */
+    margin-bottom: 10px; /* Add some space below the h1 */
+    margin-top: 10px;
+  }
+  .vehicule-details {
+    border: 1px solid #efddc9;
+    background-color: #edeae6;
+    
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #ddd;
+    height: 70px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Alternating row colors */
+tr:nth-child(odd) {
+    background-color: #edeae6;
+}
+
+tr:nth-child(even) {
+    background-color: #fff; /* white */
+}
+#vehicule-image{
+max-width: 100%; /* Ensure the image doesn't exceed its container width */
+margin-left: 300px; /* Add some spacing between the paragraph and the image */
+width: 800px;
+height:300px ;
+
+}
+
+/*.vehicule-details {
+    background-color: #efddc9;
+    padding: 20px;
+    
+   
+    border-radius: 10px; /* Coins arrondis*/
+   /* border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+   /* padding: 5%;
+   /* margin: 5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }*/

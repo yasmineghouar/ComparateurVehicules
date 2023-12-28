@@ -1,0 +1,140 @@
+#Bzone1 {
+    
+    background-color: #efddc9;
+   height: 1410px;
+    border-radius: 10px; /* Coins arrondis*/
+    border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+    padding: 5%;
+    margin: 5%;
+    display: flex;
+  flex-direction: column; /* Aligner les éléments en colonne */
+  flex-wrap: wrap;
+  /*align-items:flex-start;*/
+    
+}
+
+.Bzone1-container a {
+    text-decoration: none; /* Supprime les soulignements sur les liens */
+    
+  }
+  .Bzone1-container {
+    /*margin-left: 400px;*/
+    
+    margin-left: 500px;
+    
+  }
+  
+.Bzone1-container img {
+      width: 285px; /* Ajustez la largeur des images selon vos besoins */
+      height: auto; /* Garde le rapport hauteur/largeur original */
+      border-radius: 10px; /* Coins arrondis*/
+      margin-bottom: 10px;
+      margin-left: 180px;
+      /*margin: 100px;*/
+     /* margin: 50px; /* Marge autour de chaque image */
+      transition: transform 0.3s ease-in-out; /* Ajoute une transition de zoom */
+  }
+.Bzone1-container img:hover {
+    transform: scale(1.1); 
+  }
+  
+  .marque-name {
+    font-weight: bold; /*du style au texte */
+    color: #333; /* Couleur du texte */
+    font-size: large;
+    /*margin: 0;*/
+    margin-top: 60px;
+    margin-left: 200px;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+
+
+/* Style for marque details container */
+.marque-details {
+  background-color: #efddc9;
+  padding: 20px;
+  
+ 
+  border-radius: 10px; /* Coins arrondis*/
+  border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
+  padding: 5%;
+  margin: 5%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for individual information paragraphs */
+.marque-details p {
+  margin: 0;
+  padding: 10px 0;
+  color: #181c16;
+  font-style:italic;
+  font-size:large;
+  font-weight: bold;
+}
+
+/* Style for the span within the paragraphs */
+.marque-details p span {
+  font-weight: bold;
+  font-size: large;
+  font-style:italic;
+  
+  color: #cf0015; /* Red color for the span text */
+  margin-right: 5px; /* Add some spacing between the label and the value */
+}
+
+/* Style for the link */
+.marque-details a {
+  color: #cf0015;
+  text-decoration: none;
+  font-weight: bold;
+  font-size:medium;
+  font-style:normal;
+  margin-top: 5%;
+}
+
+/* Hover effect for the link */
+.marque-details a:hover {
+  text-decoration: underline;
+}
+
+/* Style for the h1 element */
+.marque-details h1 {
+  color: #cf0015; /* Red color for the h1 text */
+  text-align: center; /* Center-align the text */
+  margin-bottom: 10px; /* Add some space below the h1 */
+  margin-top: 10px;
+}
+
+/* Style for the h2 element */
+.marque-details h2 {
+  color: #cf0015; /* Red color for the h1 text */
+  text-align: center; /* Center-align the text */
+  margin-bottom: 10px; /* Add some space below the h1 */
+}
+
+/* Style for the container */
+.car-by-marque-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; /* Distribute items horizontally with space in between */
+  margin-bottom: 20px; /* Add some spacing between containers */
+}
+
+/* Style for the paragraph */
+.car-by-marque-container p {
+  margin: 0; /* Remove default margin */
+}
+
+/* Style for the image */
+.car-by-marque-container img {
+  max-width: 100%; /* Ensure the image doesn't exceed its container width */
+  margin-left: 10px; /* Add some spacing between the paragraph and the image */
+  width: 800px;
+  height:500px ;
+}
+#Choisir-voiture{
+  color: #cf0015; /* Red color for the h1 text */
+  text-align: center; /* Center-align the text */
+  margin-bottom: 10px; /* Add some space below the h1 */
+}
