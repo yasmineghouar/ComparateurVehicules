@@ -1,0 +1,58 @@
+#signinContainer {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#signinContainer h2 {
+    text-align: center;
+    color: #333;
+}
+
+#signinForm label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#signinForm input,
+#signinForm select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#signinForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #cf0015;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signinForm button:hover {
+    background-color: #e04355;
+}
+
+.pas-encore {
+    margin-top: 15px;
+    text-align: center;
+    color: #333;
+}
+
+.pas-encore a {
+    color: #5d492d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pas-encore a:hover {
+    color: #c5a173;
+}

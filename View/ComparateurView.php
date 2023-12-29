@@ -299,6 +299,23 @@ public function show_header_comparaison(){//entete de la page comparaison venant
             
         </div>
         <div id="socialMedia-container">
+        <div>
+            <?php if (isset($_SESSION['loggedIn'])){/**si le user est connecté */
+            if ($_SESSION['loggedIn']==true){
+       
+            ?> 
+      <form method="post"><button id="loginButton" name="logout">Se Deconnecter </button></form>
+      </div> 
+             <?php
+          if (isset($_POST['logout'])){
+            $cntr= new SigninController();
+            $r=$cntr->Logout();
+            }
+        }}else{?>
+        <!-- si il n est pas connecté-->
+          <button id="loginButton" onclick="location.href='/Tidjelabine/SignIn'">Se Connecter</button>
+        </div>
+   <?php }  ?>
             <a href="https://www.instagram.com/"><img src="../images/instagram.png" alt="Insta logo" class="lien-image"/></a>
             <a href="https://www.instagram.com/"><img src="../images/facebook.png" alt="facebook logo" class="lien-image"/></a>
             <a href="https://www.instagram.com/"><img src="../images/twitter.png" alt="twiiter logo" class="lien-image"/></a>
@@ -309,6 +326,7 @@ public function show_header_comparaison(){//entete de la page comparaison venant
 </html>
    <?php
     
+
 }
 public function show_menu_comparaison($menuItems){
     ?>

@@ -7,6 +7,8 @@ require_once('Controller/MarquesController.php');
 require_once('Controller/VehiculeController.php');
 require_once('Controller/NewsController.php');
 require_once('Controller/ComparateurController.php');
+require_once('Controller/SignupController.php');
+require_once('Controller/SigninController.php');
 //require_once('Controller/GuideAchatController.php');
 session_start();
 $action = $_SERVER['REQUEST_URI'];
@@ -74,6 +76,15 @@ route('/Tidjelabine/TraitementNews', function () {
 });
 route('/Tidjelabine/Comparateur', function () {
     $controller = new ComparateurController();
+    $controller->index();
+});
+
+route('/Tidjelabine/SignUp', function () {
+    $controller = new SignupController();
+    $controller->index();
+});
+route('/Tidjelabine/SignIn', function () {
+    $controller = new SigninController();
     $controller->index();
 });
 dispatch($action);

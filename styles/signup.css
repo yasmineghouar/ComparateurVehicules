@@ -1,0 +1,69 @@
+
+#signupContainer {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#signupContainer h2 {
+    text-align: center;
+    color: #333;
+}
+
+#signupForm label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#signupForm input,
+#signupForm select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#signupForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #cf0015;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signupForm button:hover {
+    background-color: #e04355;
+}
+
+.pas-encore {
+    margin-top: 15px;
+    text-align: center;
+    color: #333;
+}
+
+.pas-encore a {
+    color: #5d492d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pas-encore a:hover {
+    color: #c5a173;
+}
+#user-exist {
+    display: block; /* Pour afficher le message */
+    color: #ff0000; /* Couleur du texte en rouge */
+    background-color: #ffecec; /* Couleur de fond pâle */
+    border: 1px solid #ffb3b3; /* Bordure rouge */
+    padding: 10px; /* Espace intérieur de 10 pixels */
+    margin: 10px 0; /* Marge extérieure de 10 pixels en haut et en bas */
+    border-radius: 5px; /* Coins arrondis */
+    font-weight: bold; /* Texte en gras */
+  }
