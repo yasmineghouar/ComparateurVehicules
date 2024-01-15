@@ -3,6 +3,7 @@
 //récupérer des données qu’ils vont etre traiter et gérer
 //le contrôleur récupère les informations des smartphones à partir du modèle
 require_once('./Model/AccueilModel.php');
+require_once('./Model/VehiculeModel.php');
 require_once('./View/AccueilView.php');
 require_once('./View/ComparateurView.php');
 class AccueilController{
@@ -43,7 +44,7 @@ class AccueilController{
         return $r;//retourne les marques des véhicules
     }
 
-    public function traitementFormulaire(){
+    public function traitementFormulaire(){ //fct qui traite le formulaire de comparaison
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
            
@@ -96,6 +97,43 @@ class AccueilController{
         }
 
 
+    }
+
+    public function cars_details($id_vehicule){ //fonction qui recupere les details d'une voiture à partir de son ID ( en appelant une fct model)
+        $vehiculemodel = new VehiculeModel();
+        $carsdetails = $vehiculemodel->get_cars_details($id_vehicule);
+         return $carsdetails;
+    }
+
+    public function getMostPopularComparison(){
+        $accueilmodel = new AccueilModel();
+        $r=$accueilmodel->getMostPopularComparison();
+        
+        return $r;
+    }
+
+    public function getSecondMostPopularComparison(){
+        $accueilmodel = new AccueilModel();
+        $r=$accueilmodel->getSecondMostPopularComparison();
+        return $r;
+    }
+
+    public function requeteShowMostPopular(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $idVehicule1 = $_POST['id_vehicule_1'];
+           
+            $idVehicule2 = $_POST['id_vehicule_2'];
+     
+            $vehiculeModel = new VehiculeModel();//appeler les methode de vehicule Model
+           $detailVehicule1=$vehiculeModel->get_cars_details($idVehicule1);
+           $detailVehicule2=$vehiculeModel->get_cars_details($idVehicule2);
+        $comparateurview = new ComparateurView();
+        $comparateurview->show_header_comparaison();
+        $comparateurview->show_menu_comparaison($menuItms);
+        $comparateurview->showVehiculeDetailsMultiple2($detailVehicule1,$detailVehicule2);
+
+    }
     }
    /* public function modeles(){
         $accueilmodel = new AccueilModel();

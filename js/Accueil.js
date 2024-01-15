@@ -72,9 +72,9 @@ function getModele(marqueId, modeleId) {
       success: function(response) {
           console.log('Réponse du serveur :', response);
           $('#' + modeleId).empty();
-  
-          $.each(response, function(index, item) {  
-           $('#' + modeleId).append('<option value="">Modele</option> ');
+          $('#' + modeleId).append('<option value="">Modele</option> ');
+          $.each(response, function(index, item) {  //pr chaque modele l'ajouter danns la liste en utlisant apend
+          // $('#' + modeleId).append('<option value="">Modele</option> ');
               $('#' + modeleId).append('<option value="'+ item.modele +'">'+ 
                   item.modele +'</option>');
           });
@@ -105,9 +105,9 @@ function getModele(marqueId, modeleId) {
         success: function(response) {
             console.log('Réponse du serveur :', response);
             $('#' + versionId).empty();
-    
+            $('#' + versionId).append('<option value="">Version</option> ');
             $.each(response, function(index, item) {  
-              $('#' + versionId).append('<option value="">Version</option> ');
+            // $('#' + versionId).append('<option value="">Version</option> ');
                 $('#' + versionId).append('<option value="'+ item.version +'">'+ 
                     item.version +'</option>');
             });
@@ -137,9 +137,9 @@ function getModele(marqueId, modeleId) {
         success: function(response) {
             console.log('Réponse du serveur :', response);
             $('#' + anneeId).empty();
-    
+            $('#' + anneeId).append('option value="">Annee</option> ');
             $.each(response, function(index, item) {  
-              $('#' + anneeId).append('option value="">Annee</option> ');
+             //$('#' + anneeId).append('option value="">Annee</option> ');
                 $('#' + anneeId).append('<option value="'+ item.annee +'">'+ 
                     item.annee +'</option>');
             });
@@ -157,28 +157,47 @@ function getModele(marqueId, modeleId) {
 
 /**REQUETE GET POUR L ENVOIS DES 4 FORMULAIRES DE COMPARAISONS */
     $("#Comparer").on("click", function () {
+            //verifier avant d'envoyer les donnes dans la requete ajax si 2 forms complets min sont envoyés
+            if(!verifierFormulairesIdentiques()){//verifier si ya pas 2 vehicules identiques dans les formulaires
+                alert("Veuillez ne pas comparer des vehicules identiques!");
+                
+                return;
+            }
+            if (!validateForm()) {
+            alert("Veuillez remplir au moins 2  formulaires, dans chaque formulaire veuillez insérer les 4 champs!");
+            
+            return;
+        }
+        
         // Recuperer les données de chaque formulaire
-        var formData1 = $("#form1").serialize();
+        var formData1 = $("#form1").serialize();//cette fct retourne les champs remplis avec &( nomchamps=valeurschamps&.....)
         var formData2 = $("#form2").serialize();
         var formData3 = $("#form3").serialize();
         var formData4 = $("#form4").serialize();
-
+            if(formData4=="marque4=&modele4=&version4=&annee4="){//le formulaire 4 est vide
+                console.log("formData4== numm");
+               
+            }
+            if(formData3=="marque3=&modele3=&version3=&annee3="){//le formulaire 4 est vide
+                console.log("formData3== numm");
+               
+            }
         // Fusionner les données de tous les formulaires
         var allFormData = formData1 + "&" + formData2 + "&" + formData3 + "&" + formData4;
         console.log(allFormData);
         // Envoyer la requete AJAX avec les données combinés
         $.ajax({
-            url: '/Tidjelabine/TraitementFormulaire', //  traitement côté serveur
-            type: 'POST', // Utilisez la méthode POST pour envoyer les données
+            url: '/Tidjelabine/TraitementFormulaire', //  traitement côté serveur AcceuilController-->methode traitement formulaire
+            type: 'POST', 
             data: allFormData,
             success: function (response) {
-                // Traitez la réponse si nécessaire
+                
                 console.log('Réponse du serveur :', response);//envoyer le resultat de la requete vers la nouvelle page comparateur
                 window.location.href = "/Tidjelabine/Controller/TraitementListe.php?" + allFormData;
                 
             },
             error: function (xhr) {
-                console.log('Erreur, la requête n\'est pas entrée dans success');
+                console.log('Erreuur, la requête n\'est pas entrrée dans successs');
                 alert('Erreur ' + xhr.status);
             }
         });
@@ -186,8 +205,70 @@ function getModele(marqueId, modeleId) {
         console.log('Cliquéeeeeeeeeeeeeeeeeeeeeeee');
         //window.location.href = "/Tidjelabine/TraitementFormulaire";
     });
+//cette fct guarantit: au moins 2 formulaires parmi les 4 se remplissent , et si un formulaire est rempli les 4 champs doivent etres remplits
+   
+        /** */
+        function validateForm() {
+            // Compteur pour suivre le nombre de formulaires remplis
+            var filledFormsCount = 0;
+            
+            // Vérifier si tous les champs du formulaire sont remplis
+    
+            for (var numero = 1; numero <= 4; numero++) {//numero pour iterer les 4 formulaires
+                var isValid = true;
+            $("#form" + numero + " :input").each(function () {
+                if ($(this).val() === "") {
+                    isValid = false;
+                    return false; // Sortir de la boucle dès qu'un champ non rempli est trouvé dans le formulaire #formId
+                }
+            });
+        
+            // Si tous les champs d'1 formulaire form sont remplis, incrémenter le compteur ( +1form remplit successfully)
+            if (isValid) {
+                filledFormsCount++;
+            }
+            }
+            // Vérifier si au moins deux formulaires parmi les quatre sont remplis
+            if (filledFormsCount >= 2) {
+                return true;
+            } else {
+                console.log("Veuillez remplir au moins deux formulaires parmi les quatre.");
+                return false;
+            }
+        }
+        function verifierFormulairesIdentiques() {
+            // Parcourir chaque formulaire
+            for (var i = 1; i <= 4; i++) {
+                // Récupérer les valeurs des champs du formulaire actuel
+                var marqueActuelle = $('#marque' + i).val();
+                var modeleActuel = $('#modele' + i).val();
+                var versionActuelle = $('#version' + i).val();
+                var anneeActuelle = $('#annee' + i).val();
 
+                // Vérifier parmi les autres formulaires
+                for (var j = 1; j <= 4; j++) {
+                    if (i !== j) {
+                        // Comparer les valeurs
+                        if (
+                            marqueActuelle === $('#marque' + j).val() &&
+                            modeleActuel === $('#modele' + j).val() &&
+                            versionActuelle === $('#version' + j).val() &&
+                            anneeActuelle === $('#annee' + j).val()
+                        ) {
+                            
+                            return false; // Sortir de la fonction dès qu'une correspondance est trouvée
+                        }else{
+                            return true;
+                        }
+                    
+                    }
+                }
+            }
 
+            // Si aucune correspondance n'est trouvée, afficher un message ou effectuer d'autres actions
+            alert('Aucun formulaire identique détecté.');
+        }
+    
    /* $("#Comparer").on("click", function () {
        
         $("#form1").submit();

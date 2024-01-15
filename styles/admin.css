@@ -1,0 +1,67 @@
+.custom-dialog {
+    background-color: white;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.custom-dialog h2 {
+    color: #333;
+}
+
+.custom-dialog p {
+    color: #666;
+    margin: 5px 0;
+}
+ /* Styles pour les deux formulaires */
+ form {
+    max-width: 400px; /* Ajustez la largeur maximale selon vos besoins */
+    margin: 20px auto; /* Centrer les formulaires horizontalement avec une marge */
+    padding: 20px;
+   
+    border-radius: 10px;
+    
+}
+
+/* Styles pour les labels communs aux deux formulaires */
+form label {
+    color: #181c16;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Styles pour les champs de texte communs aux deux formulaires */
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #c5a173;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Styles pour les boutons communs aux deux formulaires */
+form button {
+    background-color: #cf0015;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #99000c;
+}
+#details {
+    color: #333; /* Couleur du texte par défaut */
+    text-decoration: none; /* Supprimer le soulignement du lien */
+    transition: color 0.3s ease; /* Transition de couleur pour une animation fluide */
+}
+
+#details:hover {
+    color: #cf0015; /* Couleur du texte au survol */
+    text-decoration: underline;
+    cursor: pointer;
+}

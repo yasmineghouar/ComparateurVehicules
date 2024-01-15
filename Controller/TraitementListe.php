@@ -1,25 +1,56 @@
 <?php
 include '../View/VehiculeView.php';
 include '../Model/NewsModel.php';
+include '../Model/VehiculeModel.php';
 include '../Model/ComparateurModel.php';
 include '../Model/AccueilModel.php';
 include '../View/NewsView.php';
 include '../View/ComparateurView.php';
 // Vérifiez si la requête est une requête AJAX
+
+$acceuilm = new AccueilModel();//remporter le menu ( probleme de chemin )
+ $menuItms= $acceuilm->getMenu();
+
+ /********************************************* */
 if (isset($_POST['vehiculeId'])) {
 $vehiculeId = $_POST['vehiculeId'];
 //echo $marqueId;
-echo $vehiculeId;
-}
-/*$vehiculeview = new VehiculeView();
 
-$vehiculeview->showVehiculeDetails($vehiculeId);*/
+echo"<script type='text/javascript'>location.href = '/Tidjelabine/';</script>";
+}
+/*******************COMPARAISON PLUS POPILAIRE QUAND JE CLIQUE J4AFFICHE LES DETAILS DE LA COMPARAISON****************** */
+if (isset($_POST['id_vehicule_1'])) {//traiter la requete pr afficher les details de comparaison les plus populaires 
+
+  $idVehicule1 = $_POST['id_vehicule_1'];
+ 
+  $idVehicule2 = $_POST['id_vehicule_2'];
+
+  $vehiculeModel = new VehiculeModel();//appeler les methode de vehicule Model pr recuperer les details des vehicules ensuite appeler 
+  // appeler ensuite view pr les afficher
+ $detailVehicule1=$vehiculeModel->get_cars_details($idVehicule1);
+ $detailVehicule2=$vehiculeModel->get_cars_details($idVehicule2);
+$comparateurview = new ComparateurView();
+$comparateurview->show_header_comparaison();
+
+$comparateurview->show_menu_comparaison($menuItms);
+$comparateurview->showVehiculeDetailsMultiple2($detailVehicule1,$detailVehicule2);
+
+}
+
+/*Traitement requete GET apres clique sur Read More de lapage NEWS*/
 if (isset($_GET['id'])) {
+
+  
+  $vc = new ComparateurView();//prc j'ai implementer les fonctions qui affichent le header avec le chemin different
+  /** */
     $newsId = $_GET['id'];
     $newsmodel = new NewsModel();
     $newsdetails = $newsmodel->get_news_details($newsId);
-
+   
     $v = new NewsView();
+    
+    $vc->show_header_comparaison();
+    $vc->show_menu_comparaison($menuItms);
     $v->showNewsDetails($newsdetails);
    
        //echo $newsId;
@@ -30,7 +61,7 @@ if (isset($_GET['id'])) {
   
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {//traitementde la reqeuete get apres clique sur le bouton de comparaison(afficher le tableau de comparaison)
-    // Récupérez les données de l'URL 
+    
     $allFormData = $_SERVER['QUERY_STRING'];
    // echo "Résultats : " . $allFormData;//allFormData contient un string ou ya toutes les données des fromulaires envoyés
 
@@ -41,7 +72,7 @@ $valeur1 = $valeur2 = $valeur3 = $valeur4 =$valeur5 = $valeur6 = $valeur7= $vale
 // Utilisation de la fonction parse_str pour extraire les valeurs
 parse_str($allFormData, $valeurs);
 
-// Affectation des valeurs aux variables
+// recuperation des valeurs remplies dans le formulaire
 $valeur1 = isset($valeurs['marque1']) ? $valeurs['marque1'] : "";
 $valeur2 = isset($valeurs['modele1']) ? $valeurs['modele1'] : "";
 $valeur3 = isset($valeurs['version1']) ? $valeurs['version1'] : "";
@@ -62,46 +93,67 @@ $valeur14 = isset($valeurs['modele4']) ? $valeurs['modele4'] : "";
 $valeur15 = isset($valeurs['version4']) ? $valeurs['version4'] : "";
 $valeur16 = isset($valeurs['annee4']) ? $valeurs['annee4'] : "";
  
- /*echo "\nvaleur1".$valeur1;
- echo "\nvaleur2".$valeur2;
- echo "\nvaleur3".$valeur3;
- echo "\nvaleur4".$valeur4;
- echo "\nvaleur5".$valeur5;
- echo "\nvaleur6".$valeur6;
- echo "\nvaleur7".$valeur7;
- echo "\nvaleur8".$valeur8;
- echo "\nvaleur9".$valeur9;
- echo "\nvaleur10".$valeur10;
- echo "\nvaleur11".$valeur11;
- echo "\nvaleur12".$valeur12;
- echo "\nvaleur13".$valeur13;
- echo "valeur14".$valeur14;
- echo "valeur15".$valeur15;
- echo "valeur16".$valeur16;*/
- $comparateurmodel = new ComparateurModel();
+
+ $comparateurmodel = new ComparateurModel();//instancier model pour recuperer les details de vehicules (la marque,version,model,annee comme parametre)
  $car1details = $comparateurmodel->get_vehicule_details($valeur1,$valeur2,$valeur3,$valeur4);
  $car2details = $comparateurmodel->get_vehicule_details($valeur5,$valeur6,$valeur7,$valeur8);
  $car3details = $comparateurmodel->get_vehicule_details($valeur9,$valeur10,$valeur11,$valeur12);
  $car4details = $comparateurmodel->get_vehicule_details($valeur13,$valeur14,$valeur15,$valeur16);
- $acceuilm = new AccueilModel();//remporter le menu ( probleme de chemin )
- $menuItms= $acceuilm->getMenu();
+
 
  $markes=$acceuilm->get_marques();
 
- $comparateurview = new ComparateurView();
+ $comparateurview = new ComparateurView();//appeler lamethode de view pour afficher les details
  $comparateurview->show_header_comparaison();
  $comparateurview->show_menu_comparaison($menuItms);
  $comparateurview->show_Zone2($markes);
- if ($car1details !== null && $car2details !== null && $car3details !== null && $car4details !== null) {//si 4 formulaires sont remplis
-  $comparateurview->showVehiculeDetailsMultiple4($car1details,$car2details,$car3details,$car4details);
 
-} elseif($car1details !== null && $car2details !== null && $car3details === null && $car4details === null){//2forms remplits
-  $comparateurview->showVehiculeDetailsMultiple2($car1details,$car2details);
-}elseif($car1details !== null && $car2details !== null && $car3details !== null && $car4details === null){//3 forms remplis
-  $comparateurview->showVehiculeDetailsMultiple3($car1details,$car2details,$car3details);
-}else{
-  echo "vous devez remplir au moins 2 formulaires !";
+ switch (true) {
+  case $car1details !== null && $car2details !== null && $car3details !== null && $car4details !== null:
+      $comparateurview->showVehiculeDetailsMultiple4($car1details, $car2details, $car3details, $car4details);//4formlaires sont remplits
+      break;
+
+  case $car1details !== null && $car2details !== null && $car3details === null && $car4details === null://2formulaires sont remplit
+      $comparateurview->showVehiculeDetailsMultiple2($car1details, $car2details);
+      $comparateurmodel->insertComparaison($car1details, $car2details);
+      break;
+  case $car1details !== null && $car2details === null && $car3details === null && $car4details !== null://2formulaires sont remplit
+        $comparateurview->showVehiculeDetailsMultiple2($car1details, $car4details);
+        $comparateurmodel->insertComparaison($car1details, $car4details);
+        break;
+ case $car1details !== null && $car2details === null && $car3details !== null && $car4details === null://2formulaires sont remplit
+          $comparateurview->showVehiculeDetailsMultiple2($car1details, $car3details);
+          $comparateurmodel->insertComparaison($car1details, $car3details);
+          break;
+  case $car1details === null && $car2details !== null && $car3details !== null && $car4details === null://2formulaires sont remplit
+            $comparateurview->showVehiculeDetailsMultiple2($car2details, $car3details);
+            $comparateurmodel->insertComparaison($car2details, $car3details);
+            break;
+  case $car1details === null && $car2details !== null && $car3details === null && $car4details !== null://2formulaires sont remplit
+              $comparateurview->showVehiculeDetailsMultiple2($car2details, $car4details);
+              $comparateurmodel->insertComparaison($car2details, $car4details);
+              break;
+   case $car1details === null && $car2details === null && $car3details !== null && $car4details !== null://2formulaires sont remplit
+                $comparateurview->showVehiculeDetailsMultiple2($car3details, $car4details);
+                $comparateurmodel->insertComparaison($car3details, $car4details);
+                break;
+  case $car1details !== null && $car2details !== null && $car3details !== null && $car4details === null://3 formulaires sont remplit
+      $comparateurview->showVehiculeDetailsMultiple3($car1details, $car2details, $car3details);
+      break;
+ case $car1details !== null && $car2details !== null && $car3details === null && $car4details !== null://3 formulaires sont remplit
+        $comparateurview->showVehiculeDetailsMultiple3($car1details, $car2details, $car4details);
+        break;
+  case $car1details === null && $car2details !== null && $car3details !== null && $car4details !== null://3 formulaires sont remplit
+      $comparateurview->showVehiculeDetailsMultiple3($car2details, $car3details, $car4details);
+          break;
+  case $car1details !== null && $car2details === null && $car3details !== null && $car4details !== null://3 formulaires sont remplit
+            $comparateurview->showVehiculeDetailsMultiple3($car1details, $car3details, $car4details);
+                break;
+  default:
+      echo "Vous devez remplir au moins 2 formulaires !";
+      break;
 }
+
 
 
  

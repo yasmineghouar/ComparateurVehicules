@@ -8,8 +8,8 @@ class ComparateurView extends template{
 
        $this->main();
          
-        $this->showZone2();
-       
+        $this->showZone2();//appel a la fct show zone 2 qui existe dans le template 
+       $this->show_footer();
 
     }
     
@@ -24,6 +24,25 @@ public function showVehiculeDetailsMultiple4($details1, $details2, $details3, $d
      <?php foreach ($details2 as $detail2): ?>
      <?php foreach ($details3 as $detail3): ?>
      <?php foreach ($details4 as $detail4): ?>
+
+         <!---UTILISER JAVASCRIPT POUR ENVOYER SOUS FORM DE POST L'ID de VEHICULE LORSQUE ON CLIQUE SUR SONN IMAGEE-->
+
+         <form id="hiddenForm3" action="/Tidjelabine/TraitementListe" method="post" style="display: none;">
+        <input id="idVehiculeClique" type="hidden" name="vehiculeId"  >
+        </form>
+
+        <script>
+         function submitForm(idVehiculeClique) {
+           //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
+          $('#idVehiculeClique').val(idVehiculeClique);
+          // recuperer le formulaire en haut par son id
+          var form = document.getElementById('hiddenForm3');
+           // Soumettre le formulaire
+         form.submit();
+           }
+        </script>
+          <!--fin script--->
+
          <div id="vehicule-<?php echo $detail['id_vehicule']; ?>" class="vehicule-details">
  <!-- les informations détaillées du vehicule -->
  <h1>Comparaisons des véhicules:</h1>
@@ -39,10 +58,10 @@ public function showVehiculeDetailsMultiple4($details1, $details2, $details3, $d
      </tr>
      <tr>
      <td><strong>Image du Véhicule :</strong></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>"></img></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>"></img></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail3['image_vehicule']; ?>"></img></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail4['image_vehicule']; ?>"></img></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail1['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;" ></img></a></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail2['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;" ></img></a></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail3['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail3['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;" ></img></a></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail4['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail4['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;" ></img></a></td>
      </tr>
      <tr>
      <td><strong>Marque :</strong></td>
@@ -101,6 +120,42 @@ public function showVehiculeDetailsMultiple4($details1, $details2, $details3, $d
         <td><?php echo $detail4['performances']; ?></td>
     </tr>
     <tr>
+         <td><strong>Capacité moteur :</strong></td> <td><?php echo $detail1['capacite_moteur']; ?></td><td><?php echo $detail2['capacite_moteur']; ?></td>
+         <td><?php echo $detail3['capacite_moteur']; ?></td> <td><?php echo $detail4['capacite_moteur']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Poids étant vide :</strong></td> <td><?php echo $detail1['poids']; ?></td><td><?php echo $detail2['poids']; ?></td>
+         <td><?php echo $detail3['poids']; ?></td><td><?php echo $detail4['poids']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Capacité réservoir :</strong></td> <td><?php echo $detail1['capacite_reservoir']; ?></td><td><?php echo $detail2['capacite_reservoir']; ?></td>
+         <td><?php echo $detail3['capacite_reservoir']; ?></td><td><?php echo $detail4['capacite_reservoir']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Vitesse maximale :</strong></td> <td><?php echo $detail1['vitesse_max']; ?></td><td><?php echo $detail2['vitesse_max']; ?></td>
+         <td><?php echo $detail3['vitesse_max']; ?></td><td><?php echo $detail4['vitesse_max']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Style :</strong></td> <td><?php echo $detail1['style']; ?></td><td><?php echo $detail2['style']; ?></td>
+         <td><?php echo $detail3['style']; ?></td><td><?php echo $detail4['style']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Type du Carburant :</strong></td> <td><?php echo $detail1['type_carburant']; ?></td><td><?php echo $detail2['type_carburant']; ?></td>
+         <td><?php echo $detail3['type_carburant']; ?></td><td><?php echo $detail4['type_carburant']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Transmission :</strong></td> <td><?php echo $detail1['transmission']; ?></td><td><?php echo $detail2['transmission']; ?></td>
+         <td><?php echo $detail3['transmission']; ?></td> <td><?php echo $detail4['transmission']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Portes :</strong></td> <td><?php echo $detail1['nombre_portes']; ?></td><td><?php echo $detail2['nombre_portes']; ?></td>
+         <td><?php echo $detail3['nombre_portes']; ?></td>  <td><?php echo $detail4['nombre_portes']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Places :</strong></td> <td><?php echo $detail1['nombre_places']; ?></td><td><?php echo $detail2['nombre_places']; ?></td>
+         <td><?php echo $detail3['nombre_places']; ?></td><td><?php echo $detail4['nombre_places']; ?></td>
+    </tr>
+    <tr>
         <td><strong>Tarif :</strong></td>
         <td><?php echo $detail1['tarif']; ?></td>
         <td><?php echo $detail2['tarif']; ?></td>
@@ -128,6 +183,25 @@ public function showVehiculeDetailsMultiple2($details1, $details2) {
     </br></br></br></br>
      <?php foreach ($details1 as $detail1): ?>
      <?php foreach ($details2 as $detail2): ?>
+
+        <!---UTILISER JAVASCRIPT POUR ENVOYER SOUS FORM DE POST L'ID de VEHICULE LORSQUE ON CLIQUE SUR SONN IMAGEE-->
+
+        <form id="hiddenForm" action="/Tidjelabine/TraitementListe" method="post" style="display: none;">
+        <input id="idVehiculeClique" type="hidden" name="vehiculeId"  >
+        </form>
+
+        <script>
+         function submitForm(idVehiculeClique) {
+           //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
+          $('#idVehiculeClique').val(idVehiculeClique);
+          // recuperer le formulaire en haut par son id
+          var form = document.getElementById('hiddenForm');
+           // Soumettre le formulaire
+         form.submit();
+           }
+        </script>
+          <!--fin script--->
+
          <div id="vehicule-<?php echo $detail['id_vehicule']; ?>" class="vehicule-details">
  <!-- les informations détaillées du vehicule -->
  <h1>Comparaisons des véhicules:</h1>
@@ -141,9 +215,20 @@ public function showVehiculeDetailsMultiple2($details1, $details2) {
      </tr>
      <tr>
      <td><strong>Image du Véhicule :</strong></td>
-         <td><img id="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>" data-value="<?php echo $detail1['id_vehicule']; ?>"></img></td>
-         <td><img id="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>" data-value="<?php echo $detail2['id_vehicule']; ?>"></img></td>
-        
+         <td>
+         <a id="imageVehiculeResult" href="javascript:void(0);" onclick="submitForm(<?php echo $detail1['id_vehicule']; ?>)">
+            <img id="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>" data-value="<?php echo $detail1['id_vehicule']; ?>"></img>
+         </a>
+
+        </td>
+       
+
+         <td>
+         <a id="imageVehiculeResult" href="javascript:void(0);" onclick="submitForm(<?php echo $detail2['id_vehicule']; ?>)">
+            <img id="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>" data-value="<?php echo $detail2['id_vehicule']; ?>"></img>
+            </a>
+        </td>
+         
      </tr>
      <tr>
      <td><strong>Marque :</strong></td> <td><?php echo $detail1['id_marque']; ?></td><td><?php echo $detail2['id_marque']; ?></td>
@@ -167,7 +252,34 @@ public function showVehiculeDetailsMultiple2($details1, $details2) {
         <td><strong>Moteur :</strong></td><td><?php echo $detail1['moteur']; ?></td><td><?php echo $detail2['moteur']; ?></td>
     </tr>
     <tr>
-         <td><strong>Performances :</strong></td> <td><?php echo $detail1['performances']; ?></td><td><?php echo $detail2['performances']; ?></td>
+         <td><strong>Puissance :</strong></td> <td><?php echo $detail1['performances']; ?></td><td><?php echo $detail2['performances']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Capacité moteur :</strong></td> <td><?php echo $detail1['capacite_moteur']; ?></td><td><?php echo $detail2['capacite_moteur']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Poids étant vide :</strong></td> <td><?php echo $detail1['poids']; ?></td><td><?php echo $detail2['poids']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Capacité réservoir :</strong></td> <td><?php echo $detail1['capacite_reservoir']; ?></td><td><?php echo $detail2['capacite_reservoir']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Vitesse maximale :</strong></td> <td><?php echo $detail1['vitesse_max']; ?></td><td><?php echo $detail2['vitesse_max']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Style :</strong></td> <td><?php echo $detail1['style']; ?></td><td><?php echo $detail2['style']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Type du Carburant :</strong></td> <td><?php echo $detail1['type_carburant']; ?></td><td><?php echo $detail2['type_carburant']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Transmission :</strong></td> <td><?php echo $detail1['transmission']; ?></td><td><?php echo $detail2['transmission']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Portes :</strong></td> <td><?php echo $detail1['nombre_portes']; ?></td><td><?php echo $detail2['nombre_portes']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Places :</strong></td> <td><?php echo $detail1['nombre_places']; ?></td><td><?php echo $detail2['nombre_places']; ?></td>
     </tr>
     <tr>
         <td><strong>Tarif :</strong></td><td><?php echo $detail1['tarif']; ?></td><td><?php echo $detail2['tarif']; ?></td>
@@ -194,7 +306,26 @@ public function showVehiculeDetailsMultiple3($details1, $details2, $details3) {
      <?php foreach ($details1 as $detail1): ?>
      <?php foreach ($details2 as $detail2): ?>
      <?php foreach ($details3 as $detail3): ?>
-         <div id="vehicule-<?php echo $detail['id_vehicule']; ?>" class="vehicule-details">
+        
+        <!---UTILISER JAVASCRIPT POUR ENVOYER SOUS FORM DE POST L'ID de VEHICULE LORSQUE ON CLIQUE SUR SONN IMAGEE-->
+
+        <form id="hiddenForm2" action="/Tidjelabine/TraitementListe" method="post" style="display: none;">
+        <input id="idVehiculeClique" type="hidden" name="vehiculeId"  >
+        </form>
+
+        <script>
+         function submitForm(idVehiculeClique) {
+           //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
+          $('#idVehiculeClique').val(idVehiculeClique);
+          // recuperer le formulaire en haut par son id
+          var form = document.getElementById('hiddenForm2');
+           // Soumettre le formulaire
+         form.submit();
+           }
+        </script>
+          <!--fin script--->
+
+         <div id="vehicule-<?php echo $detail1['id_vehicule']; ?>" class="vehicule-details">
  <!-- les informations détaillées du vehicule -->
  <h1>Comparaisons des véhicules:</h1>
  
@@ -208,9 +339,9 @@ public function showVehiculeDetailsMultiple3($details1, $details2, $details3) {
      </tr>
      <tr>
      <td><strong>Image du Véhicule :</strong></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>" ></img></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>"></img></td>
-         <td><img class="vehicule-image" src="../<?php echo $detail3['image_vehicule']; ?>"></img></td>
+         <td> <a  href="javascript:void(0);" onclick="submitForm(<?php echo $detail1['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail1['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;" ></img></a></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail2['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail2['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;"></img></a></td>
+         <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail3['id_vehicule']; ?>)"><img class="vehicule-image" src="../<?php echo $detail3['image_vehicule']; ?>" style="max-width: 300px; height: auto; display: block; margin: 0 auto;"></img></a></td>
 
      </tr>
      <tr>
@@ -262,6 +393,42 @@ public function showVehiculeDetailsMultiple3($details1, $details2, $details3) {
         <td><?php echo $detail3['performances']; ?></td>
     </tr>
     <tr>
+         <td><strong>Capacité moteur :</strong></td> <td><?php echo $detail1['capacite_moteur']; ?></td><td><?php echo $detail2['capacite_moteur']; ?></td>
+         <td><?php echo $detail3['capacite_moteur']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Poids étant vide :</strong></td> <td><?php echo $detail1['poids']; ?></td><td><?php echo $detail2['poids']; ?></td>
+         <td><?php echo $detail3['poids']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Capacité réservoir :</strong></td> <td><?php echo $detail1['capacite_reservoir']; ?></td><td><?php echo $detail2['capacite_reservoir']; ?></td>
+         <td><?php echo $detail3['capacite_reservoir']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Vitesse maximale :</strong></td> <td><?php echo $detail1['vitesse_max']; ?></td><td><?php echo $detail2['vitesse_max']; ?></td>
+         <td><?php echo $detail3['vitesse_max']; ?></td>
+        </tr>
+    <tr>
+         <td><strong>Style :</strong></td> <td><?php echo $detail1['style']; ?></td><td><?php echo $detail2['style']; ?></td>
+         <td><?php echo $detail3['style']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Type du Carburant :</strong></td> <td><?php echo $detail1['type_carburant']; ?></td><td><?php echo $detail2['type_carburant']; ?></td>
+         <td><?php echo $detail3['type_carburant']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Transmission :</strong></td> <td><?php echo $detail1['transmission']; ?></td><td><?php echo $detail2['transmission']; ?></td>
+         <td><?php echo $detail3['transmission']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Portes :</strong></td> <td><?php echo $detail1['nombre_portes']; ?></td><td><?php echo $detail2['nombre_portes']; ?></td>
+         <td><?php echo $detail3['nombre_portes']; ?></td>
+    </tr>
+    <tr>
+         <td><strong>Nombre de Places :</strong></td> <td><?php echo $detail1['nombre_places']; ?></td><td><?php echo $detail2['nombre_places']; ?></td>
+         <td><?php echo $detail3['nombre_places']; ?></td>
+    </tr>
+    <tr>
         <td><strong>Tarif :</strong></td>
         <td><?php echo $detail1['tarif']; ?></td>
         <td><?php echo $detail2['tarif']; ?></td>
@@ -299,6 +466,9 @@ public function show_header_comparaison(){//entete de la page comparaison venant
             
         </div>
         <div id="socialMedia-container">
+        <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
+        <a style="cursor:pointer; margin-right:10px;" href="/Tidjelabine/UserProfil"><img src="../images/profil.png" width="25" height="25"></a>
+        <?php endif; ?>
         <div>
             <?php if (isset($_SESSION['loggedIn'])){/**si le user est connecté */
             if ($_SESSION['loggedIn']==true){

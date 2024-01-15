@@ -18,6 +18,12 @@ class SigninController{
     return $r;
     } 
 
+    public function estUtilisateurBloque($email, $password){//si l'utilisateur est bloqué
+        $signinModel = new SigninModel();
+        $r=$signinModel->estUtilisateurBloque($email, $password);
+        return $r;
+    }
+
     public function getUserIDbyEmail($email){//recuper id de user d'apres son email
         $signinModel = new SigninModel();
         $r= $signinModel->getUserIDbyEmail($email);
@@ -29,7 +35,14 @@ class SigninController{
     session_destroy();
     echo "<script type='text/javascript'>location.href = '/Tidjelabine/';</script>";
     } 
- 
+   
+    public function siAdmin($email,$pwd){//verifier si c'est un admin qui se connecte ou pas
+        if ($email === 'admin@admin' && $pwd === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
   
 
 }

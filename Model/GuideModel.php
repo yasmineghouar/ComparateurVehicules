@@ -13,7 +13,19 @@ class GuideModel extends templateModel {//recuperer le guide depuis la bdd
         return $result;
        
         }
-    
+
+
+     public function getGuideAchat(){//selectionner tout
+       
+        $conn = $this->connect("root", "", "TDW", "localhost");
+        $q = "SELECT * FROM guide_infos";
+
+        $result = $this->request($conn, $q);
+
+        $this->disconnect($conn);
+        return $result;
+       
+        }
 
         
 }

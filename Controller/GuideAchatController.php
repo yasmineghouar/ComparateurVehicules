@@ -19,6 +19,13 @@ class GuideAchatController{
         return $r;//retourne le guide depuis le model
     }
 
+    public function getGuideAchat(){
+        //retourne le guide complet
+        $guideModel = new GuideModel();
+        $r=$guideModel->getGuideAchat();
+        return $r;
+    }
+
 }
 
 ?>

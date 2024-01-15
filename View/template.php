@@ -48,6 +48,9 @@ Class template{
     public function show_socialMedia() {
         ?>
         <div id="socialMedia-container">
+        <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
+        <a style="cursor:pointer; margin-right:10px;" href="/Tidjelabine/UserProfil"><img src="images/profil.png" width="25" height="25"></a>
+        <?php endif; ?>
             <div>
             <?php if (isset($_SESSION['loggedIn'])){/**si le user est connecté */
             if ($_SESSION['loggedIn']==true){
@@ -249,4 +252,128 @@ Class template{
         </div>
         <?php
     }
+    public function show_footer() {
+        ?>
+        <?php
+        $cf = new AccueilController();
+        $menuItems = $cf->menu(); // Récupérer les données du contrôleur (les éléments du menu)
+        ?>
+        <center>
+            <div class="footer-menu">
+                <ul class="horizontal-list">
+                    <?php foreach ($menuItems as $menuItem): ?>
+                        <li><a href="<?php echo $menuItem['lien_element']; ?>"><?php echo $menuItem['nom_element']; ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </center>
+        <?php
+    }
+    
+    public function show2PopularComparaison($mostPopularComparison,$secondMostPopularComparison) {
+        ?>
+        <?php
+        //mostPopularComparison contient vehicule1vehicule 2
+        //secondMostPopularComparison contient vehicule 3 vehicule 4 
+                $cf =  new AccueilController();
+                $veh_cf = new VehiculeController();
+                //$mostPopularComparison = $cf->getMostPopularComparison();/*recuperer les id des vehciules les plus comparés entre eux */
+                //$secondMostPopularComparison = $cf->getSecondMostPopularComparison();/*recuperer les id des vehciules les plus comparés entre eux 2e position*/
+                
+                // Accéder aux résultats
+               $id_vehicule_1 = $mostPopularComparison['id_vehicule_1'];
+               $id_vehicule_2 = $mostPopularComparison['id_vehicule_2'];
+    
+               $marque_vehicule_1 = $veh_cf->get_marque_vehicule($id_vehicule_1);//récupèrer le nom de la marque
+               $nom_marque_vehicule_1= $marque_vehicule_1[0]['nom_marque'];
+               $marque_vehicule_2 = $veh_cf->get_marque_vehicule($id_vehicule_2);//récupèrer le nom de la marque
+               $nom_marque_vehicule_2= $marque_vehicule_2[0]['nom_marque'];
+    
+               $details1=$cf->cars_details($id_vehicule_1);
+               $details2=$cf->cars_details($id_vehicule_2);
+               //2e position
+               $id_vehicule_3 = $secondMostPopularComparison['id_vehicule_1'];
+               $id_vehicule_4 = $secondMostPopularComparison['id_vehicule_2'];
+    
+               $marque_vehicule_3 = $veh_cf->get_marque_vehicule($id_vehicule_3);//récupèrer le nom de la marque
+               $nom_marque_vehicule_3= $marque_vehicule_1[0]['nom_marque'];
+               $marque_vehicule_4 = $veh_cf->get_marque_vehicule($id_vehicule_4);//récupèrer le nom de la marque
+               $nom_marque_vehicule_4= $marque_vehicule_2[0]['nom_marque'];
+    
+               $details3=$cf->cars_details($id_vehicule_3);
+               $details4=$cf->cars_details($id_vehicule_4);
+        
+        ?>
+        <link rel="stylesheet" type="text/css" href="styles/accueil.css"></link>
+        <script src="js/marques.js"></script>
+        </br></br></br></br>
+         <?php foreach ($details1 as $detail1): ?>
+         <?php foreach ($details2 as $detail2): ?>
+            <?php foreach ($details3 as $detail3): ?>
+         <?php foreach ($details4 as $detail4): ?>
+            <form id="hiddenForm3" action="/Tidjelabine/TraitementListe" method="post" style="display: none;">
+            <input id="idVehiculeClique" type="hidden" name="vehiculeId"  >
+            </form>
+    
+            <script>
+             function submitForm(idVehiculeClique) {
+               //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
+              $('#idVehiculeClique').val(idVehiculeClique);
+              // recuperer le formulaire en haut par son id
+              var form = document.getElementById('hiddenForm3');
+               // Soumettre le formulaire
+             form.submit();
+               }
+            </script>
+             <div  class="vehicule-details">
+     <!-- les informations détaillées du vehicule -->
+     <h1>Les comparaisons les plus populaires ! :</h1>
+     <div class="table-container">
+     <table>
+      
+         <tr>
+       
+             <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail1['id_vehicule']; ?>)"><img id="vehicule-image" src="<?php echo $detail1['image_vehicule']; ?>" data-value="<?php echo $detail1['id_vehicule']; ?>" style="max-width: 100%; width: 600px;height:300px ; margin:0 auto"></img></a></td>
+             <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail2['id_vehicule']; ?>)"><img id="vehicule-image" src="<?php echo $detail2['image_vehicule']; ?>" data-value="<?php echo $detail2['id_vehicule']; ?>" style="max-width: 100%; width: 600px;height:300px ; margin:0 auto"></img></a></td>
+            
+         </tr>
+         <tr>
+         <td><?php echo $nom_marque_vehicule_1; ?> , <?php echo $detail1['modele']; ?> , <?php echo $detail1['version']; ?> , <?php echo $detail1['annee']; ?> .</td><td><?php echo $nom_marque_vehicule_2; ?> , <?php echo $detail2['modele']; ?> , <?php echo $detail2['version']; ?> , <?php echo $detail2['annee']; ?> </td>
+         </tr>
+         
+          
+     </table>
+     </div>
+     <form action="/Tidjelabine/Controller/TraitementListe.php" method="post"><input name="id_vehicule_1" value="<?php echo $id_vehicule_1; ?>" hidden ><input name="id_vehicule_2" value="<?php echo $id_vehicule_2; ?>" hidden ><button style="margin-top: 10px; cursor: pointer; padding: 8px 16px; background-color: #c5a173; color: #fff; border: none; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" onclick="this.form.submit()">Plus de détails</button></form>
+    
+     <!--2e comparaison la plus populaire--->
+     <div class="table-container">
+     <table>
+     <tr>
+         
+             <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail3['id_vehicule']; ?>)"><img id="vehicule-image" src="<?php echo $detail3['image_vehicule']; ?>" data-value="<?php echo $detail3['id_vehicule']; ?>" style="max-width: 100%; width: 600px;height:300px ; margin:0 auto"></img></a></td>
+             <td><a href="javascript:void(0);" onclick="submitForm(<?php echo $detail4['id_vehicule']; ?>)"><img id="vehicule-image" src="<?php echo $detail4['image_vehicule']; ?>" data-value="<?php echo $detail4['id_vehicule']; ?>" style="max-width: 100%; width: 600px;height:300px ; margin:0 auto;"></img></a></td>
+            
+         </tr>
+         <tr>
+         <td><?php echo $nom_marque_vehicule_3; ?> , <?php echo $detail3['modele']; ?> , <?php echo $detail3['version']; ?>, <?php echo $detail3['annee']; ?>.</td><td><?php echo $nom_marque_vehicule_4; ?> , <?php echo $detail4['modele']; ?> , <?php echo $detail4['version']; ?> , <?php echo $detail4['annee']; ?> </td>
+         </tr>
+         
+     </table>
+     
+     </div>
+     <form action="/Tidjelabine/Controller/TraitementListe.php" method="post"><input name="id_vehicule_1" value="<?php echo $id_vehicule_3; ?>" hidden ><input name="id_vehicule_2" value="<?php echo $id_vehicule_4; ?>" hidden ><button style="margin-top: 10px; cursor: pointer; padding: 8px 16px; background-color: #c5a173; color: #fff; border: none; border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" onclick="this.form.submit()">Plus de détails</button></form>
+    
+     <!-- fin infos AJOUTERRRRRRRRRR NOTE !!!!! -->
+     </div>
+       
+         <?php endforeach; ?>
+         <?php endforeach; ?>
+         <?php endforeach; ?>
+         <?php endforeach; ?>
+       
+         
+         <?php
+    }
+    
 }

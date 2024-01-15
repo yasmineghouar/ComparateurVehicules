@@ -13,6 +13,22 @@
     padding: 20px;
     margin: 20px 0;
 }
+.show-Avis-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #181c16;
+    border-radius: 8px;
+    background-color: #edeae6;
+}
+
+.show-Donner-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: white;
+}
+
 
 table {
     width: 100%;
@@ -38,22 +54,99 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
     background-color: #fff; /* white */
 }
-#vehicule-image{
-max-width: 100%; /* Ensure the image doesn't exceed its container width */
-margin-left: 300px; /* Add some spacing between the paragraph and the image */
-width: 800px;
-height:300px ;
 
+
+/* Style pour le formulaire d'envoi de note */
+#donnerNote {
+    text-align: center;
 }
 
-/*.vehicule-details {
-    background-color: #efddc9;
-    padding: 20px;
+#donnerNote select {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #181c16;
+    border-radius: 4px;
+    width: 30%;
+    box-sizing: border-box;
+    background-color: #edeae6;
+    color: #181c16;
+    cursor: pointer;
+    display: block; /* Affiche le select en tant que bloc */
     
-   
-    border-radius: 10px; /* Coins arrondis*/
-   /* border: 5%  #333; /* Utilisation d'une valeur absolue pour la bordure */
-   /* padding: 5%;
-   /* margin: 5%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }*/
+    margin: 0 auto;
+}
+
+#donnerNote button {
+    padding: 10px;
+    background-color: #cf0015;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Affiche le bouton en tant que bloc */
+    margin: 10px auto 0;
+}
+
+/* Style pour le formulaire d'envoi d'avis */
+#donnerAvis {
+    text-align: center;
+}
+
+#donnerAvis textarea {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #181c16;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+#donnerAvis button {
+    padding: 10px;
+    background-color: #cf0015;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto 0;
+}
+
+/* Style pour la liste des avis */
+#tousAvis ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#tousAvis li {
+    border-bottom: 1px solid #181c16;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #edeae6;
+}
+#afficherAvis {
+    color: #cf0015;
+    text-decoration: underline; 
+    font-size: 20px; /* Taille de la police */
+        font-family: 'Arial', sans-serif; /* Police de caractères */
+        font-weight: bold; /* Gras */
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+#aff-container{
+    display: block;
+    margin-left: 650px;
+}
+
+
+/*#vehicule-image{
+    max-width: 100%; 
+    margin-left: 300px; 
+    width: 800px;
+    height:350px ;
+    
+    }
+*/
+    

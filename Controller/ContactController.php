@@ -12,7 +12,7 @@ class ContactController{
                     
     }
      
- 
+ /*fonction qui retourne les infos contacte du site */
     public function ContactInfos() {
         $contactModel = new ContactModel();
         $r=$contactModel->getContact();

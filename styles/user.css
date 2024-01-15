@@ -1,0 +1,87 @@
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+h2 {
+    color: #c5a173;
+    margin-bottom: 30px;
+}
+h1 {
+    color: #333;
+    text-align: center;
+    animation: fadeInUp 5s ease-in-out infinite;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.car-item {
+    background-color: #ffffff;
+    border: 1px solid #c5a173;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.car-item:hover {
+    transform: scale(1.05);
+}
+
+.car-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.car-item h2 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #181c16; /* Vous pouvez ajuster la couleur du texte ici */
+}
+
+.car-item p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+#styled-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #c5a173;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#styled-div a {
+    text-decoration: none;
+    color: #181c16;
+    font-weight: bold;
+}
+
+#styled-div a:hover {
+    color: #cf0015; /* Changement de couleur au survol */
+}

@@ -1,65 +1,9 @@
 <?php
 //require_once ('template.php');
    //récupèrer les données du controleur et les afficher
-  class AccueilView {
+  class AccueilView extends template {
       
    
-    public function Head_page() {
-        ?>
-        <head>
-            <link href="styles/accueil.css" rel="stylesheet" type="text/css"/>
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-           
-             <!-- Inclure le fichier accueil.js -->
-             <script src="js/Accueil.js"></script>
-           
-            <title>Tidjelabine</title>
-        </head>
-        <?php
-    }
-    
-    public function afficherLogo() {
-        ?>
-        <div id="logo-container">
-            <img src="images/Logo Tidjelabine2.png" alt="Logo Tidjelabine" id="logo"/>
-            
-            
-        </div>
-       
-        <?php
-    }
-
-
-   
-    public function show_socialMedia() {
-        ?>
-        <div id="socialMedia-container">
-            <div>
-            <?php if (isset($_SESSION['loggedIn'])){/**si le user est connecté */
-            if ($_SESSION['loggedIn']==true){
-       
-            ?> 
-      <form method="post"><button id="loginButton" name="logout">Se Deconnecter </button></form>
-      </div> 
-             <?php
-          if (isset($_POST['logout'])){
-            $cntr= new SigninController();
-            $r=$cntr->Logout();
-            }
-        }}else{?>
-        <!-- si il n est pas connecté-->
-          <button id="loginButton" onclick="location.href='/Tidjelabine/SignIn'">Se Connecter</button>
-        </div>
-   <?php }  ?>
-           
-            <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Insta logo" class="lien-image"/></a>
-            <a href="https://www.instagram.com/"><img src="images/facebook.png" alt="facebook logo" class="lien-image"/></a>
-            <a href="https://www.instagram.com/"><img src="images/twitter.png" alt="twiiter logo" class="lien-image"/></a>
-        </div>
-        
-        <?php
-    }
-
      public function show_diaporama(){
         ?>
         <?php
@@ -299,7 +243,17 @@
                 <button id="buttonZone3" onclick="window.location.href='/Tidjelabine/GuideAchat'">Avez-vous besoin de l'aide? le Guide d'achat est là pour vous!</button>
             </div>
             <?php
+            
+            $cf =  new AccueilController();
+            $veh_cf = new VehiculeController();
+            $mostPopularComparison = $cf->getMostPopularComparison();/*recuperer les id des vehciules les plus comparés entre eux */
+            $secondMostPopularComparison = $cf->getSecondMostPopularComparison();/*recuperer les id des vehciules les plus comparés entre eux 2e position*/
+            $this->show2PopularComparaison($mostPopularComparison,$secondMostPopularComparison);//appel a la fct dans template qui affiche les 
+            //2 comparaisons les plus populaires dans le web
         }
+
+/********************************************************************************************************************************** */
+ 
 
         
 
@@ -322,12 +276,76 @@ echo '<button id="login-button" onclick="window.location.href=\'/Tidjelabine/Log
         $this->showZone1();
         $this->showZone2();
         $this->showZone3();
+       // $this->show2PopularComparaison();
         echo '</div>';
         $this->show_footer();
         echo '</body>';
         echo '</html>';
      }
 
+ /*public function Head_page() {
+        ?>
+        <head>
+            <link href="styles/accueil.css" rel="stylesheet" type="text/css"/>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+           
+             <!-- Inclure le fichier accueil.js -->
+             <script src="js/Accueil.js"></script>
+           
+            <title>Tidjelabine</title>
+        </head>
+        <?php
+    }*/
+    
+    /*public function afficherLogo() {
+        ?>
+        <div id="logo-container">
+            <img src="images/Logo Tidjelabine2.png" alt="Logo Tidjelabine" id="logo"/>
+            
+            
+        </div>
+       
+        <?php
+    }
+*/
+
+   
+  /*  public function show_socialMedia() {//leheader a droite //LE BOUTON LOGIN SE TROUVE ICI
+        ?>
+        
+        <div id="socialMedia-container">
+        <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
+        <a style="cursor:pointer; margin-right:10px;" href="/Tidjelabine/UserProfil"><img src="images/profil.png" width="25" height="25"></a>
+        <?php endif; ?>
+        <div>
+            <?php if (isset($_SESSION['loggedIn'])){/**si le user est connecté 
+            if ($_SESSION['loggedIn']==true){
+       
+            ?> 
+            
+      <form method="post"><button id="loginButton" name="logout">Se Deconnecter </button></form>
+      
+      </div> 
+      
+             <?php
+          if (isset($_POST['logout'])){
+            $cntr= new SigninController();
+            $r=$cntr->Logout();
+            }
+        }}else{
+            ?>
+        <!-- si il n est pas connecté-->
+          <button id="loginButton" onclick="location.href='/Tidjelabine/SignIn'">Se Connecter</button>
+        </div>
+   <?php }  ?>
+           
+            <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Insta logo" class="lien-image"/></a>
+            <a href="https://www.instagram.com/"><img src="images/facebook.png" alt="facebook logo" class="lien-image"/></a>
+            <a href="https://www.instagram.com/"><img src="images/twitter.png" alt="twiiter logo" class="lien-image"/></a>
+        </div>
+        
+        <?php
+    }*/
 
     /*
     public function show_title_page(){

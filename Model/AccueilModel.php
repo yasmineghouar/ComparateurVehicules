@@ -38,14 +38,36 @@ class AccueilModel extends templateModel {
       }
      
 */
-    public function getDiaporama(){
+public function getDiaporama(){ //recupere les news et les publicités et leurs liens
+    $conn = $this->connect("root", "", "TDW", "localhost");
+    
+   
+
+    // Sélection des images et liens de la table publicites
+    $qPublicites = "SELECT image_url, lien FROM publicites";
+    $rPublicites = $this->request($conn, $qPublicites);
+     // Sélection des images et liens de la table news
+     $qNews = "SELECT image_url, lien FROM news";
+     $rNews = $this->request($conn, $qNews);
+
+    // Fusionner les résultats des deux requêtes
+    $result = array_merge($rNews, $rPublicites);
+    // Désordonner les lignes aléatoirement
+     shuffle($result);
+
+    $this->disconnect($conn);
+
+    return $result;
+}
+
+    /*public function getDiaporama(){
         $conn=$this->connect("root","","TDW","localhost");
        $q= "SELECT image_url, lien FROM news";
         $r= $this->request($conn,$q);
         $this->disconnect($conn);
         return $r;
 
-    }
+    }*/
     public function getMenu(){//recuperer les elements du menu
         $conn=$this->connect("root","","TDW","localhost");
         $q= "SELECT nom_element, lien_element FROM elementsMenu";
@@ -119,6 +141,49 @@ class AccueilModel extends templateModel {
         $this->disconnect($conn);
         return $result;
     }
+
+    public function getMostPopularComparison() {
+        $conn = $this->connect("root", "", "TDW", "localhost");
+    
+        // Sélectionner les deux ID des véhicules avec le nombre de clics le plus élevé
+        $query = "SELECT id_vehicule_1, id_vehicule_2
+                  FROM comparaisons
+                  ORDER BY nbr_cliques DESC
+                  LIMIT 1";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+    
+        // Récupérer les résultats
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Fermer la connexion
+        $conn = null;
+    
+        return $result;
+    }
+
+
+    public function getSecondMostPopularComparison() {
+        $conn = $this->connect("root", "", "TDW", "localhost");
+    
+        // Sélectionner les deux ID des véhicules avec le deuxième nombre de clics le plus élevé
+        $query = "SELECT id_vehicule_1, id_vehicule_2
+                  FROM comparaisons
+                  ORDER BY nbr_cliques DESC
+                  LIMIT 1 OFFSET 1";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+    
+        // Récupérer les résultats
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Fermer la connexion
+        $conn = null;
+    
+        return $result;
+    }
+    
+
 
     
 }
