@@ -24,6 +24,27 @@ public function getUserNomPrenom($id_utilisateur){//retounr nom et prenom du use
         
         return $result;
     }
+    public function getUserInfo($id_utilisateur){//retounr infos du user pour l afficher dans profile page
+       
+        $conn = $this->connect("root", "", "TDW", "localhost");
+    
+        
+        $q = "SELECT date_naissance, email, sexe FROM utilisateurs WHERE id_utilisateur = :id_utilisateur";
+        $stmt = $conn->prepare($q);
+    
+        // Liaison du paramètre avec la requete préparée
+        $stmt->bindParam(':id_utilisateur', $id_utilisateur);
+        $stmt->execute();
+    
+        
+        $result = $stmt->fetchAll();
+    
+        
+        $this->disconnect($conn);
+    
+        
+        return $result;
+    }
 
     function getFavorisDetails($id_utilisateur) {//retounr les vehicules favoris du user $id_utilisateur
         $model = new templateModel();

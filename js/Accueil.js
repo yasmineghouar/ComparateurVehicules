@@ -56,7 +56,7 @@ window.getModele = getModele;//// Attacher la fonction à l'objet window pour la
 }
 */
 
-function getModele(marqueId, modeleId) {
+function getModele(marqueId, modeleId) {//recuperer les modeles a partir d une marque et l afficher dan sle shamps suivant
   console.log('Fonction appelée');
   console.log('marqueId envoyé :', marqueId);
   
@@ -161,6 +161,7 @@ function getModele(marqueId, modeleId) {
             if(!verifierFormulairesIdentiques()){//verifier si ya pas 2 vehicules identiques dans les formulaires
                 alert("Veuillez ne pas comparer des vehicules identiques!");
                 
+                
                 return;
             }
             if (!validateForm()) {
@@ -191,8 +192,8 @@ function getModele(marqueId, modeleId) {
             type: 'POST', 
             data: allFormData,
             success: function (response) {
-                
-                console.log('Réponse du serveur :', response);//envoyer le resultat de la requete vers la nouvelle page comparateur
+                //les envoyer a cceuilController-->methode traitement formulaire pour utiliser la reponse et linstruction window.location.href
+                console.log('Réponse du serveur :', response);//envoyer le resultat sous forme de la requete vers la nouvelle page comparateur
                 window.location.href = "/Tidjelabine/Controller/TraitementListe.php?" + allFormData;
                 
             },

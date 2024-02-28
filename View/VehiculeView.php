@@ -59,7 +59,7 @@ class VehiculeView extends template{
     }*/
 
 
-    public function showVehiculeDetails($vehicule_id) {
+    public function showVehiculeDetails($vehicule_id) {//fct view qui affiche la page Vehicules Details
         ?>
         
         <link rel="stylesheet" type="text/css" href="styles/vehicule.css"></link>
@@ -69,17 +69,17 @@ class VehiculeView extends template{
        
     
         <?php
-        $cfAcc =  new AccueilController();
-        $marques = $cfAcc->marques();//récupèrer les données du controleur(les marques principales)
+        $cfAcc =  new AccueilController();//appeler les fcts controller pr recuperer les donnes du controller avec id $vehicule_id 
+        $marques = $cfAcc->marques();//récupèrer les données du controleur(les marques)
         $cf = new VehiculeController();
-        $details = $cf->cars_details($vehicule_id); // récupérer les données du contrôleur (lesdetails du vehicule donné)
+        $details = $cf->cars_details($vehicule_id); // récupérer les données du contrôleur (les details du vehicule donné)
         $marque_vehicule = $cf->get_marque_vehicule($vehicule_id);//récupèrer le nom de la marque
         $nom_marque_vehicule= $marque_vehicule[0]['nom_marque'];
-        $noteVehiccule= $cf->getMoyenneNotesVehicule($vehicule_id);
+        $noteVehiccule= $cf->getMoyenneNotesVehicule($vehicule_id);//recuperer la moyenne note de la marque
         ?>
         
         <?php foreach ($details as $detail): ?>
-        
+        <!--afficher les details  du vehicule-->
             <div id="vehicule-<?php echo $detail['id_vehicule']; ?>" class="vehicule-details">
     <!-- les informations détaillées du vehicule -->
     <h1>Détails du véhicule:</h1>
@@ -177,7 +177,7 @@ class VehiculeView extends template{
     </table>
     
 </div>
-
+<!--afficher la note moyenne du vehicule-->
 <div class="show-Avis-container">
              <h2 style="color: #cf0015; font-size: 24px; text-align: center; margin-bottom: 20px; text-transform: uppercase;"> Note moyenne du véhicule: </h2>
             <h2 style="color: #583E26; font-size: 24px; text-align: center; margin-bottom: 20px; text-transform: uppercase;">
@@ -185,7 +185,7 @@ class VehiculeView extends template{
             </h2>
 </div>
         <?php endforeach; ?>
-<!-- Afficher les 3 meilleurs avis du vehicule -->
+<!-- Afficher les 3 meilleurs avis du vehicule --------------------------------------------->
             </br></br>
             <div class="show-Avis-container">
             <h2 style="color: #cf0015; font-size: 24px; text-align: center; margin-bottom: 20px; text-transform: uppercase;">
@@ -198,7 +198,7 @@ class VehiculeView extends template{
          ?>
          <?php foreach ($resultats_avis as $avis) : ?>
             <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) : ?>
-            <!-- L'utilisateur est connecté, afficher le lien de like -->
+            <!-- L'utilisateur est connecté, afficher le lien de like -------------->
             <a id="AvisLikee"  href="javascript:void(0);" onclick="submitFormAvisV(<?php echo $avis['id_avis']; ?> , <?php echo $_SESSION['user']; ?>)"> 
             <img src="images/favorie.png" width="20" height="20" style="margin-top: 5px;">
             </a>
@@ -227,8 +227,9 @@ class VehiculeView extends template{
     </ul>
 </div>
          </br>
-<!-- Le lien qui déclenchera l'affichage de la liste -->
-<div id="aff-container">
+ <!----------------------afficher tousles avis ------------------------>
+            <!---- Le lien qui déclenchera l'affichage de la liste des commentaires------->
+            <div id="aff-container">
 <a id="afficherAvis">Afficher tous les avis</a>
             </div>
 <div id="tousAvis" class="show-Avis-container" style="display: none;">
@@ -269,9 +270,8 @@ class VehiculeView extends template{
         <?php endforeach; ?>
     </ul>
 </div>
-
         <?php
-/**  PARTIE AJOUTER UN AVIS*/
+/**  PARTIE AJOUTER UN AVIS**********************************/
 
 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
     ?>
@@ -488,6 +488,8 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 
             </div>
             </br></br>
+
+           
             <?php
               $cf = new AccueilController();
               $veh_cf = new VehiculeController();
@@ -495,12 +497,18 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
               $secondMostPopularComparison = $veh_cf->getSecondPopularComparisonForVehicle($vehicule_id);/*recuperer les id des vehciules les plus comparésaevc ce vehicule 2e position*/
               
     // $this->show_popular_comparaison($vehicule_id); 
+    
     $this->show2PopularComparaison($mostPopularComparison,$secondMostPopularComparison);//appel fct dans template qui affiche les 2 comparaisons les plus populaires
-             ?>
-            <!---------------------------------------------->
-            <!------------------------------------------------->
             
+            
+            
+            ?>
+           
+
+            <!------------------------------------------------->
+                         
 <?php
+
     }
 
    

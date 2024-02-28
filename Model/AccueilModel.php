@@ -38,10 +38,9 @@ class AccueilModel extends templateModel {
       }
      
 */
-public function getDiaporama(){ //recupere les news et les publicités et leurs liens
+    public function getDiaporama(){ //recupere les news et les publicités et leurs liens
     $conn = $this->connect("root", "", "TDW", "localhost");
     
-   
 
     // Sélection des images et liens de la table publicites
     $qPublicites = "SELECT image_url, lien FROM publicites";

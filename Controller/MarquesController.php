@@ -69,7 +69,7 @@ class MarquesController{
            
             $marque_id_post = $_POST['marqueId'];
             $commentaire=$_POST['avisMarque'];
-            $id_utilisateur=$_SESSION["user"];
+            $id_utilisateur=$_SESSION["user"];//recuperer l'id du user qui a commenté
             
             $this->insertAvisMarque($id_utilisateur, $marque_id_post, $commentaire);//appeler la fct du controlleur qui insert l'avis ajouté qui appelle a son tour la dct model qui insert dans la bdd
             $v=new MarquesView();

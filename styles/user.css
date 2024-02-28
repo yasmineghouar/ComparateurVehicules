@@ -66,6 +66,40 @@ h1 {
     font-size: 0.9rem;
     color: #777;
 }
+.user-info-table {
+    margin-top: 20px;
+    background-color: #edeae6; /* Couleur de fond */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    overflow: hidden;
+    width: 300px; /* Largeur fixe */
+    margin: 0 auto; /* Centré au milieu */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr {
+    border-bottom: 1px solid #c5a173; /* Bordure basse de chaque ligne */
+}
+
+table td {
+    padding: 10px;
+    text-align: left;
+    color: #181c16; /* Couleur du texte */
+}
+
+table td:first-child {
+    font-weight: bold;
+    color: #cf0015; /* Couleur du texte pour la première colonne */
+}
+
+table td:last-child {
+    word-break: break-all; /* Gestion des longs emails sans débordement */
+}
+
 #styled-div {
     margin-top: 20px;
     margin-bottom: 20px;

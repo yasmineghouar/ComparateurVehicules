@@ -50,7 +50,7 @@ class AvisView extends template{
                 <p class="marque-name"><?php echo $marque['nom_marque']; ?></p>
                  <!--IMAGE LIEN MARQUE LORSQUE JE CLIQUE J4ENVOIS GET A LA MEME PAGE PR ACCEDER A SHOW DETAILS MARQUE EN BAS PAGE-->
                 <a class="marques-scroll" data-id="<?php echo $marque['id_marque']; ?>"  data-marque="<?php echo $marque['nom_marque']; ?>" href="javascript:void(0);" onclick="submitFormMarques(<?php echo $marque['id_marque']; ?>)">
-                    <img src="<?php echo $marque['image_marque']; ?>" alt="<?php echo $marque['nom_marque']; ?>">                 
+                  <img src="<?php echo $marque['image_marque']; ?>" alt="<?php echo $marque['nom_marque']; ?>">                 
                 </a>
                
             <?php endforeach; ?> 
@@ -190,7 +190,7 @@ class AvisView extends template{
         $resultats_avis = $cntr->voir_tous_avis($id_vehicule);
         ?>
             <div id="tousAvis" class="show-Avis-container">
-           <!---liste des avis qui seront paginé à 5 a la fois-->
+           <!---liste des avis qui seront paginé à 5 a la fois--------------------------------------------->
             <ul>
         <?php 
         
@@ -200,12 +200,11 @@ class AvisView extends template{
         ?>
         <!--PARTIIIIIIIIE SECTION COMMENTAIREEEES SUR LES VEHICULLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLES-->
 
-
             <li style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
 
             <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) : ?>
             <!-- que siiiiiiiiii L'utilisateur est connecté, afficher le lien de like -->
-            <a id="AvisLikee"  href="javascript:void(0);" onclick="submitFormAvisV(<?php echo $avis['id_avis']; ?> , <?php echo $id_vehicule; ?>)"> 
+            <a id="AvisLikee"  href="javascript:void(0);" onclick="submitFormAvisV(<?php echo $avis['id_avis']; ?> , <?php echo $_SESSION['user']; ?>)"> 
             <img src="images/favorie.png" width="20" height="20" style="margin-top: 5px;">
             </a>
         <?php endif; ?>

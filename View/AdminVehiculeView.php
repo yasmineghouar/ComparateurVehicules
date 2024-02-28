@@ -14,7 +14,7 @@ class AdminVehiculeView extends template{
      }
 
 
-     public function show_marques(){
+     public function show_marques(){//fct qui affiche a l admin les informations des marques
         ?>
         <link rel="stylesheet" type="text/css" href="styles/admin.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -23,14 +23,15 @@ class AdminVehiculeView extends template{
 
 <!-- Insérer cette balise "script" après celle de Bootstrap -->
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+
        <script src="js/admin.js"></script>
          <?php
-        $cf =  new MarquesController();
-        $marques = $cf->BigZone1();//récupèrer les données du controleur(les marques principales)
+        $cf =  new MarquesController();//appeler le controller
+        $marques = $cf->BigZone1();//récupèrer les données du controleur(les marques existantes )
         ?>
         <div style="height: 20px;"></div>
           <h1 style="color: #5d492d; font-size: 32px; text-align: center;">Les marques</h1>
-        
+        <!--tableau admin marques-->
         <section class="container">
         <div class="row">
             <div class="col-12">
@@ -49,8 +50,8 @@ class AdminVehiculeView extends template{
             <td><a href="<?php echo $marque['lien_marque']; ?>"><?php echo $marque['lien_marque']; ?></a></td>
             <td> <img style ="width:100px; height:100px" src=<?php echo $marque['image_marque']; ?>></td>
             <td><form action="/Tidjelabine/AdminVehiculesMarques" method="post"> <input name="showVehicMarque" value=<?php echo $marque['id_marque'];?> hidden><input style="background-color: #c5a173; color: white; padding: 10px 15px; border-radius: 4px;cursor: pointer;" value="Véhicules" type="submit"></form></td>
-            <td>   <!--lien de suppression et modification news-->
-            <a href="/Tidjelabine/Controller/apiroute.php?newsIdS=<?php echo $article['id_news']; ?>"><img src="images/bouton-supprimer.png" width="20" height="20"></a> 
+            <td>   <!--lien de suppression et modification marqie-->
+            <a href="/Tidjelabine/Controller/apiroute.php?marqueIdS=<?php echo $marque['id_marque']; ?>"><img src="images/bouton-supprimer.png" width="20" height="20"></a> 
             <a style="cursor: pointer;" onclick="afficherFormulaireModification(<?php echo $marque['id_marque']; ?>, '<?php echo $marque['nom_marque']; ?>', '<?php echo $marque['pays_origine']; ?>', '<?php echo $marque['siege_social']; ?>', <?php echo $marque['annee_creation']; ?>, '<?php echo $marque['lien_marque']; ?>', '<?php echo $marque['image_marque']; ?>')"><img src="images/bouton-modifier.png" width="20" height="20"></a></td>
           </tr>
           
@@ -118,7 +119,7 @@ class AdminVehiculeView extends template{
 <!-- Insérer cette balise "script" après celle de Bootstrap -->
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
       <script src="js/admin.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      
          <?php
         //$cf =  new VehiculeController();
         //$vehicules = $cf->get_all_cars();//récupèrer les données du controleur(les voitures)
@@ -131,7 +132,20 @@ class AdminVehiculeView extends template{
         ?>
           <div style="height: 50px;"></div>
           <h1 style="color: #5d492d; font-size: 32px; text-align: center;">Les véhicules</h1>
-          
+          <form id="hiddenForm3" action="/Tidjelabine/TraitementListe" method="post" style="display: none;">
+            <input id="idVehiculeCliquee" type="hidden" name="vehiculeId"  >
+            </form>
+    
+            <script>
+             function showDetails(idVehiculeClique) {
+               //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
+              $('#idVehiculeCliquee').val(idVehiculeClique);
+              // recuperer le formulaire en haut par son id
+              var form = document.getElementById('hiddenForm3');
+               // Soumettre le formulaire
+             form.submit();
+               }
+            </script>
           <section class="container">
         <div class="row">
             <div class="col-12">
@@ -141,6 +155,7 @@ class AdminVehiculeView extends template{
 		
           <thead><tr><th data-sortable="true" data-field="id" data-searchable="true">ID</th><th data-sortable="true" data-field="marque" data-searchable="true">Marque</th><th data-sortable="true" data-field="modele" data-searchable="true">Modele</th><th>Version</th><th data-sortable="true" data-field="date" data-searchable="true">Année</th><th>Lien</th><th>Gestion</th></tr></thead>
           <tbody>
+         
           <?php foreach($vehicules as $vehicule):?>
             <?php
         $cf =  new VehiculeController();
@@ -153,9 +168,11 @@ class AdminVehiculeView extends template{
             <td><?php echo $vehicule['modele']; ?></td>
             <td><?php echo $vehicule['version']; ?></td>
             <td><?php echo $vehicule['annee']; ?></td>
+           
             <!--lien afficher les details-->
-            <td><a id="details" onclick="afficherVehiculeDetails(<?php echo $vehicule['id_vehicule']; ?>,'<?php echo $vehicule['dimensions']; ?>','<?php echo $vehicule['consommation']; ?>','<?php echo $vehicule['moteur']; ?>','<?php echo $vehicule['performances']; ?>',<?php echo $vehicule['type_vehicule']; ?>,<?php echo $vehicule['tarif']; ?>,'<?php echo $vehicule['image_vehicule']; ?>','<?php echo $vehicule['capacite_moteur']; ?>','<?php echo $vehicule['poids']; ?>','<?php echo $vehicule['capacite_reservoir']; ?>','<?php echo $vehicule['vitesse_max']; ?>','<?php echo $vehicule['style']; ?>','<?php echo $vehicule['type_carburant']; ?>','<?php echo $vehicule['transmission']; ?>',<?php echo $vehicule['nombre_portes']; ?>,<?php echo $vehicule['nombre_places']; ?>)">Détails</a></td>
-           <!--modifier et supp-->
+            <td> <a href="javascript:void(0);" onclick="showDetails(<?php echo $vehicule['id_vehicule']; ?>)">Détails</a></td>
+            <!--td><a id="details" onclick="afficherVehiculeDetails(<!-?php echo $vehicule['id_vehicule']; ?>,'<!-?php echo $vehicule['dimensions']; ?>','<!-?php echo $vehicule['consommation']; ?>','<!-?php echo $vehicule['moteur']; ?>','<!-?php echo $vehicule['performances']; ?>',<!-?php echo $vehicule['type_vehicule']; ?>,<!-?php echo $vehicule['tarif']; ?>,'<!-?php echo $vehicule['image_vehicule']; ?>','<!-?php echo $vehicule['capacite_moteur']; ?>','<!-?php echo $vehicule['poids']; ?>','<!-?php echo $vehicule['capacite_reservoir']; ?>','<!-?php echo $vehicule['vitesse_max']; ?>','<!-?php echo $vehicule['style']; ?>','<!-?php echo $vehicule['type_carburant']; ?>','<!-?php echo $vehicule['transmission']; ?>',<!-?php echo $vehicule['nombre_portes']; ?>,<!-?php echo $vehicule['nombre_places']; ?>)">Détails</a></td>
+           <!-modifier et supp-->
             <td><a style="cursor: pointer;" href="/Tidjelabine/Controller/apiroute.php?vehiculeIdS=<?php echo $vehicule['id_vehicule']; ?>"><img src="images/bouton-supprimer.png" width="20" height="20"></a> 
             <a style="cursor: pointer;" onclick="afficherFormulaireModificationVehicule(<?php echo $vehicule['id_vehicule']; ?>, <?php echo $vehicule['id_marque']; ?>,'<?php echo $vehicule['modele']; ?>','<?php echo $vehicule['version']; ?>',<?php echo $vehicule['annee']; ?> ,'<?php echo $vehicule['dimensions']; ?>','<?php echo $vehicule['consommation']; ?>','<?php echo $vehicule['moteur']; ?>','<?php echo $vehicule['performances']; ?>','<?php echo $vehicule['couleur']; ?>',<?php echo $vehicule['type_vehicule']; ?>,<?php echo $vehicule['tarif']; ?>,'<?php echo $vehicule['image_vehicule']; ?>','<?php echo $vehicule['capacite_moteur']; ?>','<?php echo $vehicule['poids']; ?>','<?php echo $vehicule['capacite_reservoir']; ?>','<?php echo $vehicule['vitesse_max']; ?>','<?php echo $vehicule['style']; ?>','<?php echo $vehicule['type_carburant']; ?>','<?php echo $vehicule['transmission']; ?>',<?php echo $vehicule['nombre_portes']; ?>,<?php echo $vehicule['nombre_places']; ?>)"><img src="images/bouton-modifier.png" width="20" height="20"></a></td>
           </tr>

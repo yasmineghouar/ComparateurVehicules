@@ -139,6 +139,16 @@ tr:nth-child(even) {
     display: block;
     margin-left: 650px;
 }
+#afficherAvisVehic{
+    color: #cf0015;
+    text-decoration: underline; 
+    font-size: 20px; /* Taille de la police */
+        font-family: 'Arial', sans-serif; /* Police de caractères */
+        font-weight: bold; /* Gras */
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
 
 
 /*#vehicule-image{

@@ -17,6 +17,12 @@ class UserProfilController{
       $res =  $userM->getUserNomPrenom($id_utilisateur);
       return $res;
    }
+
+   public function getUserInfo($id_utilisateur){//retourne les infos d'un utilisateur
+    $userM = new UserProfilModel();
+    $res =  $userM->getUserInfo($id_utilisateur);
+    return $res;
+   }
     
    public  function getFavorisDetails($id_utilisateur){
     $userM = new UserProfilModel();

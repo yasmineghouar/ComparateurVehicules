@@ -245,6 +245,7 @@ function affFormModGuide(id_guide,guide){
     }
     window.afficherModificationPubDiapo=afficherModificationPubDiapo;
 
+/****************************ajouter filtre sexe user */
 
 
 });

@@ -53,6 +53,7 @@ class AdminParametreView extends template{
   
           <!-- formulaire de modification Contact-->
         <form action="/Tidjelabine/Controller/apiroute.php" method="post" id="formModContact" style="display: none;">
+        <span style="display: block; font-size: 18px; font-weight: bold;  color: #cf0015; margin-bottom: 15px;"> Formulaire Modification Contact</span> 
              <label for="id_contact" hidden>id Contact:</label>
             <input type="number" id="id_contact" name="id_contact" hidden>
             <label for="adresse">Adresse :</label>
@@ -283,7 +284,7 @@ class AdminParametreView extends template{
     </section>
 
                <!-- Formulaire de modification de publicité (image et lien seulement) -->
-     <form action="/Tidjelabine/Controller/apiroute.php" method="post" id="upFrmPubDiapo" style="display: none;" hidden>
+     <form action="/Tidjelabine/Controller/apiroute.php" method="post" id="upFrmPubDiapo" style="display: none;">
      <span style="display: block; font-size: 18px; font-weight: bold;  color: #cf0015; margin-bottom: 15px;"> Formulaire Modification Pub</span> 
     <label for="id_publicite" hidden></label>
     <input type="number" id="id_publicite" name="id_publicite_modifier" hidden>

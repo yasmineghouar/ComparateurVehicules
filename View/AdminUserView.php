@@ -14,17 +14,47 @@ class AdminUserView extends template{
      }
 
 
-     public function show(){//afficher tableau gestion users
-        ?>
-        <link rel="stylesheet" type="text/css" href="styles/admin.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <!-- Insérer cette balise "link" après celle de Bootstrap -->
-<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
-
-<!-- Insérer cette balise "script" après celle de Bootstrap -->
-<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
-
-        <script src="js/admin.js"></script>
+     public function show()//afficher gestion utilisateur
+     {
+         ?>
+         <link rel="stylesheet" type="text/css" href="styles/admin.css">
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+               crossorigin="anonymous">
+         <!-- Insérer cette balise "link" après celle de Bootstrap -->
+         <link rel="stylesheet"
+               href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+ 
+         <!-- Insérer cette balise "script" après celle de Bootstrap -->
+         <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+         <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+         <script src="js/admin.js"></script>
+         <script>
+             $(document).ready(function () {
+                 $('#table').bootstrapTable({
+                     filterControl: true, 
+                     
+                     filterOptions: {
+                         filterAlgorithm: 'and', 
+                        
+                         sexe: $.fn.bootstrapTable.filterData.sexe
+                     }
+                 });
+ 
+                 $.fn.bootstrapTable.filterData.sexe = function (text, target, searchKey) {
+                     return text.toLowerCase() === searchKey.toLowerCase();
+                 };
+ 
+                 // Trigger the filter control change event
+                 $('#table').on('column-search.bs.table', function (e, column, value) {
+                     if (column.field === 'sexe') {
+                         $('#table').bootstrapTable('filterBy', {
+                             sexe: value
+                         });
+                     }
+                 });
+             });
+         </script>
         <?php
         $cf =  new AdminUserController();
         $users = $cf->get_all_users();//récupèrer les données du controleur(les users)
@@ -34,13 +64,9 @@ class AdminUserView extends template{
             <div class="col-12">
             <table id="table" class="table" data-toggle="table" data-search="true" data-filter-control="true"  data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
          
-		
-			
-			 
-			 
                     <thead>
                         <tr>
-                        <th data-sortable="true" data-field="id" data-searchable="true">ID</th><th data-sortable="true" data-field="nom" data-searchable="true">Nom</th><th data-sortable="true" data-field="prenom">Prenom</th><th>Sexe</th><th data-sortable="true" data-field="date" data-filter-control="select">Date de naissance</th><th>Email</th><th data-sortable="true" data-field="valide" data-searchable="true">inscription validée</th><th data-sortable="true" data-field="bloque" data-searchable="true">User bloqué</th><th>Gestion</th>
+                        <th data-sortable="true" data-field="id" data-searchable="true">ID</th><th data-sortable="true" data-field="nom" data-searchable="true">Nom</th><th data-sortable="true" data-field="prenom">Prenom</th><th data-sortable="true" data-field="sexe" data-filter-control="select">Sexe</th><th data-sortable="true" data-field="date" data-searchable="true">Date de naissance</th><th>Email</th><th data-sortable="true" data-field="valide" data-searchable="true">inscription validée</th><th data-sortable="true" data-field="bloque" data-searchable="true">User bloqué</th><th>Gestion</th>
                            
                         </tr>
                     </thead>

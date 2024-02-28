@@ -7,9 +7,19 @@ $(document).ready(function () {
 
     // Afficher ou masquer la liste d'avis avec une animation de fondu
     $("#tousAvis").fadeToggle();
+   // $("#tousAvis").fadeToggle(3000); 
     console.log('Display:', $("#tousAvis").css('display'));
    });
+   
+   //page vehicule clique sur afficher tous les avis
+   $("#afficherAvisVehic").click(function(e) {
+    e.preventDefault(); // Empêcher le lien de suivre le chemin du lien normal
 
+    // Afficher ou masquer la liste d'avis avec une animation de fondu
+    $("#tousAvisVehic").fadeToggle();
+    
+    console.log('Display:', $("#tousAvis").css('display'));
+   });
    
     //traiter la liste droulante des vehicules
     $('#carSelect').on('change', function () {

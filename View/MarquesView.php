@@ -99,7 +99,7 @@ if (isset($_GET['marqueId'])) {
         
      <?php if ($marque['id_marque'] == $marques_id): ?>
         <div id="marque-<?php echo $marque['id_marque']; ?>" class="marque-details">
-            <!--  les informations détaillées de la marque -->
+            <!----------  les informations détaillées de la marque ---------------------------------->
             <h1> Détails de la marque: </h1>
             <p><span>Nom:</span> <?php echo $marque['nom_marque']; ?></p>
             <p><span>Année:</span> <?php echo $marque['annee_creation']; ?></p>
@@ -121,7 +121,7 @@ if (isset($_GET['marqueId'])) {
               <input id="idVehiculeClique" type="hidden" name="vehiculeId"  >
                </form>
                <script>
-    
+    //fct js qui envoit le id du vehicule cliqué par post pour afficher la page details du vehicule cliqué
                function submitFormm(idVehiculeClique) {
                 //modifier value de input pour envoyer en POST au VEHICULECONTROLLER METHOD traitementformulaire(); pr aficher les details vehicule cliqué
                $('#idVehiculeClique').val(idVehiculeClique);
@@ -141,6 +141,7 @@ if (isset($_GET['marqueId'])) {
          // Limiter la boucle to two iterations; pour afficher que les 2 principales voitures
          if ($counter < 2):
           ?>   
+              <!----------  les vehicules principales de la marque---------------------------------->
                <div onclick="submitFormm(<?php echo $car['id_vehicule']; ?>)" class="car-by-marque-container">
               <p ><span>Le modèle:</span><?php echo $car['modele']; ?></p>
             <a href="javascript:void(0);" onclick="submitForm(<?php echo $detail1['id_vehicule']; ?>)"><img src="<?php echo $car['image_vehicule']; ?>"></img></a>
@@ -159,7 +160,7 @@ if (isset($_GET['marqueId'])) {
                 <?php echo number_format($noteAvrMrk, 1); ?> /5 
             </h2>
      </div>
-      <!-- Le lien qui déclenchera l'affichage de la liste -->
+      <!-- Le lien qui déclenchera l'affichage de la liste des commentaires------------------------------>
 <div id="aff-container">
 <a id="afficherAvis">Lire les avis </a>
             </div>
@@ -171,7 +172,7 @@ if (isset($_GET['marqueId'])) {
                
 
                 <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) : ?>
-            <!-- L'utilisateur est connecté, afficher le lien de like -->
+            <!-- L'utilisateur est connecté, afficher le lien de like ---------------------------------------------->
             <a id="AvisLike"  href="javascript:void(0);" onclick="submitFormMarquesAvis(<?php echo $avis['id_avis']; ?> , <?php echo $_SESSION['user']; ?>)"> 
                 <img src="images/favorie.png" width="20" height="20" style="margin-top: 5px;">
             </a>
@@ -201,7 +202,7 @@ if (isset($_GET['marqueId'])) {
      <?php
 
 
-/** **********PARTIE AJOUTER UN AVIS/NOTE MARQUE ************/
+/** **********PARTIE AJOUTER UN AVIS/NOTE MARQUE *************************************************************/
 
      if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) { //il peut donner un avis qu'un user est connecté
     ?>
@@ -224,7 +225,7 @@ if (isset($_GET['marqueId'])) {
     </div>
 </br>
 
-     <!--donner un avis pour une marque-->
+     <!--donner un avis pour une marque-------------------------------------------------------------------->
      
      <div id="donnerAvis" class="show-Donner-container">
      <form action="/Tidjelabine/ShowDetailsMarque" method="post">
@@ -243,7 +244,7 @@ if (isset($_GET['marqueId'])) {
         if (isset($_POST['avisMarque'])){
             $cntr= new MarquesController();
             // Récupérer la valeur de marqueId à partir du champ caché
-            echo "avis marque inserer";
+           
             $marque_id_post = $_POST['marqueId'];
             $commentaire=$_POST['avisMarque'];
             $id_utilisateur=$_SESSION["user"];
@@ -252,14 +253,14 @@ if (isset($_GET['marqueId'])) {
             }
              /**traitement formulaire note */
         if (isset($_POST['noteMarque'])){
-            echo 'traitement note marque';
+           
         $cntr= new MarquesController();
         // Récupérer la valeur de marqueId à partir du champ caché
         $marque_id_post = $_POST['marqueIdNote'];
         $note=$_POST['noteMarque'];
         $id_utilisateur=$_SESSION["user"];
         
-        $cntr->insertNoteMarque($id_utilisateur,$marque_id_post,$note);
+        $cntr->insertNoteMarque($id_utilisateur,$marque_id_post,$note);//appeler controller qui insert la note
         }
     }
 ?>
@@ -278,7 +279,7 @@ if (isset($_GET['marqueId'])) {
     </div>
     <input type="submit" value="Voir Details du Véhicule">
 </form>
-      <!-- fin de la boucle des marques--->  
+      <!-- fin de la boucle des marques-------------------------------------------------------------------------------------------->  
      <?php endif; ?>
      <?php endforeach; ?>
             

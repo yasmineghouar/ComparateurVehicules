@@ -6,19 +6,22 @@ include_once("../Model/AdminParametreModel.php");
 include_once("../Model/AdminUserModel.php");
 include_once("../View/UserProfilView.php");
 include_once("../Model/UserProfilModel.php");
-
+include_once("../Model/AdminVehiculeModel.php");
+include_once("../Model/AdminAvisModel.php");
 
 if (isset($_GET['marqueIdS'])){ //supprimer marque
    $marque_id=$_GET['marqueIdS'];
    unset($_GET['marqueIdS']);
-   deleteMarque($marque_id);
+   $adminVehiculeModel = new AdminVehiculeModel();
+   $adminVehiculeModel->deleteMarque($marque_id);
     header("location:/Tidjelabine/AdminVehicule");
 }
 
 if (isset($_GET['vehiculeIdS'])){ //supprimer vehicule
     $vehicule_id=$_GET['vehiculeIdS'];
     unset($_GET['vehiculeIdS']);
-    deleteVehicule($vehicule_id);
+    $adminVehiculeModel = new AdminVehiculeModel();
+    $adminVehiculeModel->deleteVehicule($vehicule_id);
      header("location:/Tidjelabine/AdminVehicule");
  }
 
@@ -32,7 +35,8 @@ if ( isset($_POST['id_marque_modifier'])){ //moddifier  marque
     $annee_creation=$_POST['annee_creation_modifier'];
     $lien_marque=$_POST['lien_marque_modifier'];
     $image_marque=$_POST['image_marque_modifier'];
-    updateMarque($marque_id,$marque_nom,$pays_origine,$siege_social,$annee_creation,$lien_marque,$image_marque);
+    $adminVehiculeModel = new AdminVehiculeModel();
+    $adminVehiculeModel->updateMarque($marque_id,$marque_nom,$pays_origine,$siege_social,$annee_creation,$lien_marque,$image_marque);
      header("location:/Tidjelabine/AdminVehicule");
  }
  if ( isset($_POST['id_vehicule_modifier'])){ //moddifier  info vehicules 
@@ -59,7 +63,8 @@ if ( isset($_POST['id_marque_modifier'])){ //moddifier  marque
     $nombre_portes_modifier=$_POST['nombre_portes_modifier'];
     $nombre_places_modifier=$_POST['nombre_places_modifier'];
      //appelle methode update
-    updateVehicule($id_vehicule_modifier,$nom_marque, $modele_modifier, $version_modifier,$annee_modifier,$dimensions_modifier,$consommation_modifier,$moteur_modifier,$performances_modifier,$couleur_modifier,$type_vehicule_modifier,$tarif_modifier,$image_vehicule_modifier,$capacite_moteur_modifier,$poids_modifier,$capacite_reservoir_modifier,$vitesse_max_modifier,$style_modifier,$type_carburant_modifier,$transmission_modifier,$nombre_portes_modifier,$nombre_places_modifier);
+     $adminVehiculeModel = new AdminVehiculeModel();
+     $adminVehiculeModel->updateVehicule($id_vehicule_modifier,$nom_marque, $modele_modifier, $version_modifier,$annee_modifier,$dimensions_modifier,$consommation_modifier,$moteur_modifier,$performances_modifier,$couleur_modifier,$type_vehicule_modifier,$tarif_modifier,$image_vehicule_modifier,$capacite_moteur_modifier,$poids_modifier,$capacite_reservoir_modifier,$vitesse_max_modifier,$style_modifier,$type_carburant_modifier,$transmission_modifier,$nombre_portes_modifier,$nombre_places_modifier);
     header("location:/Tidjelabine/AdminVehicule");
  }
  
@@ -99,21 +104,25 @@ if ( isset($_POST['id_marque_modifier'])){ //moddifier  marque
     $transmission_A=$_POST['transmission_A'];
     $nombre_portes_A=$_POST['nombre_portes_A'];
     $nombre_places_A=$_POST['nombre_places_A'];
-    addVehicule($nom_marque_ajouter, $modele_A, $version_A,$annee_A,$dimensions_A,$consommation_A,$moteur_A,$performances_A,$couleur_A,$type_vehicule_A,$tarif_A,$image_vehicule_A,$capacite_moteur_A,$poids_A,$capacite_reservoir_A,$vitesse_max_A,$style_A,$type_carburant_A,$transmission_A,$nombre_portes_A,$nombre_places_A);
+    $adminVehiculeModel = new AdminVehiculeModel();
+    $adminVehiculeModel->addVehicule($nom_marque_ajouter, $modele_A, $version_A,$annee_A,$dimensions_A,$consommation_A,$moteur_A,$performances_A,$couleur_A,$type_vehicule_A,$tarif_A,$image_vehicule_A,$capacite_moteur_A,$poids_A,$capacite_reservoir_A,$vitesse_max_A,$style_A,$type_carburant_A,$transmission_A,$nombre_portes_A,$nombre_places_A);
      header("location:/Tidjelabine/AdminVehicule");
  }
 /**gestion des avis */
 if (isset($_GET['avisS'])){ //supprimer avis
     $avis_id=$_GET['avisS'];
     unset($_GET['avisS']);
-    deleteAvis($avis_id);
+    $adminAvisModel = new AdminAvisModel();
+    $adminAvisModel->deleteAvis($avis_id);
      header("location:/Tidjelabine/AdminAvis");
  }
  /**valider avis s avis */
 if (isset($_GET['avisV'])){ //valider avis
     $avis_id=$_GET['avisV'];
     unset($_GET['avisV']);
-    validerAvis($avis_id);
+    $adminAvisModel = new AdminAvisModel();
+    $adminAvisModel->validerAvis($avis_id);
+   
      header("location:/Tidjelabine/AdminAvis");
  }
 
@@ -121,7 +130,9 @@ if (isset($_GET['avisV'])){ //valider avis
  if (isset($_GET['utilisateurS'])){ //bloquer utilisateur
     $id_utilisateur=$_GET['utilisateurS'];
     unset($_GET['utilisateurS']);
-    bloquerUtilisateur($id_utilisateur);
+    
+    $adminAvisModel = new AdminAvisModel();
+    $adminAvisModel->bloquerUtilisateur($id_utilisateur);
      header("location:/Tidjelabine/AdminAvis");
  }
  /**GESTION ADMIN NEWS : SUPPRESSION ARTICLE */

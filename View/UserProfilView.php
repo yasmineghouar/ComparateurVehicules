@@ -21,6 +21,10 @@ class UserProfilView extends template{ //page utilisateur
         $usercf = new UserProfilController();
         $vehiculesFav=$usercf->getFavorisDetails($user_id);//recuperer les vehicules favoris du user
         $resNomPre=$usercf->getUserNomPrenom($user_id);//recuperer son nom et son prenom
+        $infoUser=$usercf->getUserInfo($user_id);//recuperer les infos de l'utilisateur
+        $mail=$infoUser[0]['email'];
+        $genre=$infoUser[0]['sexe'];
+        $date=$infoUser[0]['date_naissance'];
         $nom= $resNomPre[0]['nom'];
         $prenom= $resNomPre[0]['prenom'];
         ?>
@@ -28,7 +32,24 @@ class UserProfilView extends template{ //page utilisateur
         <script src="js/marques.js"></script>
         <div class="bienvenu-container"> 
         <h1>Bienvenue <?php echo $prenom . ' ' . $nom; ?> !</h1>
-        </div>
+        
+        <div class="user-info-table">
+        <table>
+            <tr>
+                <td>Sexe:</td>
+                <td><?php echo ($genre === 'M') ? 'Masculin' : 'Féminin'; ?></td>
+            </tr>
+            <tr>
+                <td>Date de naissance:</td>
+                <td><?php echo date('d-m-Y', strtotime($date)); ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?php echo $mail; ?></td>
+            </tr>
+        </table>
+    </div>
+</div>
          <div class="profile-container">
         <h3>Voici vos voitures favorites :</h3>
         

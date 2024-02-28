@@ -143,8 +143,8 @@ class VehiculeController{
                 $avisModel = new AvisModel();
                 
                 if(!$avisModel->utilisateurAvisExists($id_userLike,$avisIdClik)){//incrementer nombre de like de l'avis courant que si ce user ne l'a pas déja fait
-                    $avisModel->enregistrerLike($id_userLike,$avisIdClik);
-                    $avisModel->apprecierAvis($avisIdClik);
+                    $avisModel->enregistrerLike($id_userLike,$avisIdClik);//stocker dans la bdd le like avec celui qui a liké ( user peut pas liker2fois)
+                    $avisModel->apprecierAvis($avisIdClik);//appeler la methode qui incremente nbr_appreciartion du commentaire
                  
                 }
             $nbre_appreciation =  $avisModel->getNbrLikeAvis($avisIdClik);//afficher le nouveau nombre d'appreciation 

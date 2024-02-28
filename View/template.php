@@ -97,7 +97,7 @@ Class template{
     
 
 
-    public function showZone2() {
+    public function showZone2() {//fct quiaffich eles 4 cadres de comparaison
         ?>
           
          <?php
@@ -254,6 +254,9 @@ Class template{
     }
     public function show_footer() {
         ?>
+         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+           
+           <script src="js/Accueil.js"></script>
         <?php
         $cf = new AccueilController();
         $menuItems = $cf->menu(); // Récupérer les données du contrôleur (les éléments du menu)
@@ -305,7 +308,7 @@ Class template{
         
         ?>
         <link rel="stylesheet" type="text/css" href="styles/accueil.css"></link>
-        <script src="js/marques.js"></script>
+        <!--script src="js/marques.js"></script-->
         </br></br></br></br>
          <?php foreach ($details1 as $detail1): ?>
          <?php foreach ($details2 as $detail2): ?>
